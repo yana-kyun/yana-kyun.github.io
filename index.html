@@ -62,18 +62,22 @@
 
     .projects {
       display: grid;
+      align-items: stretch;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1.5rem;
       margin: 3rem 0;
     }
 
     .project-card {
-      position: relative;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1.25rem;
       transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
 
     .project-card:hover {
@@ -94,8 +98,6 @@
 
     .btn {
       display: inline-block;
-      position: absolute;
-      bottom: 0.5rem;
       background: var(--accent);
       color: white;
       text-decoration: none;
