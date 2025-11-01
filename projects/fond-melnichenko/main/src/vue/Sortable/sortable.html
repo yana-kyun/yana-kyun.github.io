@@ -1,0 +1,83 @@
+<script type="text/x-template" id="v-sortable-template">
+  <div class="sortable__container">
+    <div class="sortable__body js-sortable" v-show="!showCorrect">
+      <ul class="sortable__items-first text-s flex-shrink" v-if="questionStorage.textShow">
+        <li class="sortable__title text-bold" v-for="(text, key) in questionStorage.texts">
+            {{text}}
+        </li>
+      </ul>
+      <ul class="flex-grow" :class="['sortable__items-second js-sort-block', { 'full': !questionStorage.textShow }]">
+        <li class="sortable__item text-s js-sort-item" v-for="(sort, key) in sortArray"
+            :data-id="key"
+        >
+            <span v-html="sort.text"></span>
+            <div class="sortable-drag-area js-sort">&nbsp;</div>
+            <div class="sortable-drag-area-icon">
+                <img class="" src="user/img/icon/sortable-drag-area-icon.svg">
+            </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sortable__body" v-show="showCorrect">
+      <ul class="sortable__items-first text-s flex-shrink" v-if="questionStorage.textShow">
+        <li class="sortable__title text-bold" v-for="(text, key) in questionStorage.texts">
+            {{text}}
+        </li>
+      </ul>
+      <ul class="flex-grow" :class="['sortable__items-second', { 'full': !questionStorage.textShow}]">
+        <li class="sortable__item text-s" v-for="(sort, key) in questionStorage.sortable"
+            :data-id="key"
+        >
+            <span v-html="sort.text"></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sortable__footer text-center">
+      <button class="btn btn-common btn-common__text btn-common_border mt-40 mt-xs-20 mb-xs-20" v-if="btnAccept" @click="accept()">
+          <span class="btn__text">Принять ответ</span>
+      </button>
+    </div>
+
+    <!-- Обратная связь -->
+    <div class="w-100">
+        <div class="flex flex-column  js-scroll-feedback mt-60 mt-xs-40" v-if="feedbackShow && !showCorrect">
+            <div class="flex flex-column-xs">
+                <div class="order-xs-2 align-vertical">
+                    <div class="mr-30">
+                        <img :src="questionStorage.feedback.imgPersIncorrect" width="130" />
+                    </div>
+                </div>
+                <div class="order-xs-1 w-xs-100 mb-xs-20 align-center align-vertical">
+                    <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                        <p class="text-m" v-if="!showCorrect && !showFeedbackText">
+                            {{ questionStorage.feedback.textIncorrect}}
+                        </p>
+                        <p class="text-m" v-if="showFeedbackText || showCorrect">
+                            {{ questionStorage.feedback.textCorrect}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" v-if="showFeedbackText == false">
+                <button 
+                    class="btn btn-common btn-common__text btn-common_border mt-60 mt-xs-45 mb-xs-20" 
+                    @click="refresh()" 
+                    v-if="!showCorrect && (counterAttempt <= questionStorage.maxAttempts)"
+                >
+                    <span class="btn__text">Попробовать ещё раз</span>
+                </button>
+                <button 
+                    class="btn btn-common btn-common__text btn-common_border mt-60 mt-xs-45 mb-xs-20" 
+                    @click="sortCorrect()" 
+                    v-if="!showCorrect && (counterAttempt > questionStorage.maxAttempts)"
+                >
+                    <span class="btn__text">Узнать ответ</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+  </div>
+</script>

@@ -1,0 +1,346 @@
+@use "../../style/_vars";
+@use "../../utils/variables/variables";
+
+.container-scroll {
+    &_dialog {
+        &.big-header {
+            margin: 160px auto auto auto;
+            height: calc(100dvh - 160px);
+    
+            @media #{$breakpoint-xs-only} {
+              margin: 126px auto auto auto;
+              height: calc(100dvh - 126px);
+            }
+        }
+        &.normal-header {
+            margin: 160px auto auto auto;
+            height: calc(100dvh - 160px);
+    
+            @media #{$breakpoint-xs-only} {
+              margin: 110px auto auto auto;
+              height: calc(100dvh - 110px);
+            }
+        }
+    }
+}
+
+.dialog-image {
+    max-width: 600px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    @media #{$breakpoint-xs-only} {
+        max-width: 100%;
+    }
+
+    // ДЛЯ ВСТАВКИ В module.js:
+    // secondText: [
+    //     {
+    //         results: false,
+    //         text:`<img 
+    //             class="dialog-image" 
+    //             src="user/img/dialog/img-dialog-2.png" 
+    //         >`
+    //     }
+    // ],
+
+}
+
+.dialog-feedback {
+    display: flex;
+    justify-content: end;
+}
+
+.dialog-radio-buttons {
+    display: flex;
+    min-width: fit-content;
+    gap: 10px; /* Отступ между кнопками */
+}
+
+.dialog-radio-button {
+    position: relative;
+    @media (max-width:719px) {
+        width: 100%;
+    }
+}
+
+/* Скрываем настоящий радио-инпут */
+.dialog-radio-button input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Стили для "кнопки" (span) */
+.dialog-radio-button .dialog-button-text {
+    display: inline-block;
+    text-align: center;
+    padding: 11px 35px;
+    background: $white;
+    border: 2px solid $primary;
+    color: $primary;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    line-height: 150%;
+    
+    @media (max-width:719px) {
+        width: 100%;
+    }
+}
+
+/* Стиль при выборе */
+.dialog-radio-button input:checked + .dialog-button-text {
+    background: $primary;
+    color: white;
+    border-color: $primary;
+}
+
+/* Эффект при наведении */
+
+
+.dialog-radio-button:hover .dialog-button-text {
+    @media #{$breakpoint-lg-only} {
+        background: #e0e0e0;
+    }
+  
+}
+
+.dialog-answers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+    @media #{$breakpoint-xs-only} {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.dialog-question-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @media #{$breakpoint-xs-only} {
+        gap: 5px;
+
+        &-left {
+            margin-right: 30px;
+        }
+
+        &-right {
+            margin-left: 30px;
+        }
+    }
+
+    .dialog-block {
+        &:last-child {
+            gap: 0;
+        }
+    }
+    
+    
+}
+
+.dialog-block {
+    display: flex;
+    flex-direction: column;
+
+    &-left {
+        justify-content: flex-start;
+    }
+
+    &-right {
+        justify-content: flex-end;
+    }
+
+}
+
+/* добавляем хвостик */
+.dialog-tail {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url('../img/img-dialog-tail.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @media #{$breakpoint-xs-only} {
+        width: 8px;
+        height: 8px;
+    }
+
+    &-left {
+        left: -20px;
+        top: 22px;
+
+        @media #{$breakpoint-xs-only} {
+            left: -8px;
+            top: 12px;
+        }
+    }
+
+    &-right {
+        right: -20px;
+        top: 22px;
+        transform: scaleX(-1);
+
+        @media #{$breakpoint-xs-only} {
+            right: -8px;
+            top: 12px;
+        }
+    }
+}
+
+.dialog-bubble {
+    position: relative;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    background: #FFF;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.10);
+
+    @media #{$breakpoint-xs-only} {
+        padding: 5px 10px;
+    }
+
+}
+
+.dialog-gap {
+    gap: 20px;
+    
+    &-10-5 {
+        gap: 10px;
+        @media #{$breakpoint-xs-only} {
+            gap: 5px;
+        }
+
+    }
+}
+
+.dialog-basis {
+    flex-basis: 830px;
+}
+
+.delayed-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    animation-delay: .5s; /* Задержка 2 секунды */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Анимация */
+.dialog-animated {
+    opacity: 0;
+    animation-name: fadeInUp;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+    animation-delay: 0s; // будет переопределена inline через Vue
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dialog-results {
+    display: flex;
+    flex-direction: column;
+    max-width: 658px;
+    flex-grow: 1;
+    background-color: $primary;
+    color: $white;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 10px;
+    
+    @media #{$breakpoint-xs-only} {
+        padding: 20px;
+    }
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &-item {
+        display: flex;
+        align-items: start;
+        gap: 5px;
+
+        &::before {
+            content: url(../img/icon/icon-list-correct.svg);
+            width: 24px;
+            height: 24px;
+            text-align: center;
+        }
+    }
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 50px;
+    min-height: fit-content;
+}
+
+.indicator-block {
+    @media #{$breakpoint-xs-only} {
+    padding: 5px 10px;
+    }
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #999; /* Исходный цвет (серый) */
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: pulse 1.5s infinite ease-in-out;
+
+    @media #{$breakpoint-xs-only} {
+        width: 5px;
+        height: 5px;
+        background-color: #999; /* Исходный цвет (серый) */
+        border-radius: 50%;
+        margin: 0 3px;
+    }
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        background-color: #999; /* Серый */
+    }
+    50% {
+        background-color: #555; /* Темно-серый */
+    }
+}

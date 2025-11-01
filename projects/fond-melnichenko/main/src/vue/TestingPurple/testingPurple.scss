@@ -1,0 +1,107 @@
+@import "../../style/_vars";
+
+.test {
+  &__answers {
+    .form__input {
+      width: 100%;
+      border-radius: 5px;
+      font-size: $fs16;
+      padding: 16px 12px;
+    }
+
+    .form__input:disabled {
+      background-color: rgba($white, 1);
+    }
+  }
+
+  &__footer-wrapper {
+    height: 40px;
+  }
+
+  // &__contextBlock {
+  //     color: white;
+  //     background: linear-gradient(101.21deg, #3C2FD0 -12.8%, #9E32F2 190.18%);
+  //     border-radius: 10px;
+  //     padding: 30px;
+  // }
+
+  &__container {
+    &.purple {
+      .suptext {
+        color: rgba($white, 0.5);
+      }
+
+      .radio {
+        // padding: 15px 0;
+        border-bottom: 1px solid rgba($white, 0.1);
+
+        &:first-child {
+          border-top: 1px solid rgba($white, 0.1);
+        }
+      }
+      .radio label:before {
+        border: 2px solid white;
+      }
+
+      .radio label:after {
+        background-color: rgba(#8e00fe, 1);
+      }
+
+      .radio input[type="radio"]:checked + label:before {
+        border-color: rgba($white, 1);
+        background-color: rgba($white, 1);
+      }
+
+      .radio label.incorrect_sel {
+        background: none !important;
+      }
+
+      .radio label.incorrect_sel:after {
+        background: none !important;
+      }
+
+      // .radio label.correct_show:before {
+      // }
+      
+      .radio label.correct_show:before {
+        content: url("../../user/img/correct_purple.png") !important;
+        background-color: rgba($white, 1) !important;
+        border: none;
+      }
+
+      .checkbox {
+        padding: 15px 0;
+        margin: 0;
+        border-bottom: 1px solid rgba($white, 0.1);
+
+        &:first-child {
+          border-top: 1px solid rgba($white, 0.1);
+        }
+
+        @media (max-width: 719px) {
+          padding: 10px 0;
+        }
+      }
+
+      .checkbox label:before {
+        border: 2px solid white !important;
+        background-color: rgba(#8e00fe, 1);
+      }
+
+      .checkbox input[type="checkbox"]:checked + label:before {
+        border: 2px solid rgba(#8e00fe, 1) !important;
+        background-color: rgba($white, 1);
+      }
+
+      .checkbox input[type="checkbox"]:checked + label:after {
+        border-bottom: 2px solid rgba(#8e00fe, 1);
+        border-left: 2px solid rgba(#8e00fe, 1);
+      }
+
+      .btn_border.white {
+        color: #fff;
+        border: 1px solid #fff;
+      }
+    }
+  }
+}

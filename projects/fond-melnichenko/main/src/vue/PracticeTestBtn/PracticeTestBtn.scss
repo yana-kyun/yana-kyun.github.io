@@ -1,0 +1,158 @@
+@import "../../style/_vars";
+
+.btn-choice {
+
+    .hint-pts {
+      background-color: $light-gray;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      padding: 20px;
+      @media (max-width:719px) {
+        margin-bottom: 20px;
+        padding: 15px 20px;
+      }
+    }
+    
+    // .options-container {
+    //   margin-bottom: 40px;
+    //   @media (max-width:719px) {
+    //     margin-bottom: 20px;
+    //   }
+    // }
+    
+    .option {
+        cursor: pointer;
+        border: 1px solid $light-gray-2;
+        border-radius: 8px;
+        padding: 16px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &-container {
+            display: grid;
+            gap: 20px;
+            width: 100%;
+
+            @media #{$breakpoint-xs-only} {
+                gap: 8px;
+            }
+        }
+
+        &.selected,
+        &.was-selected {
+            border: 1px solid $primary;
+            &.correct {
+                border: 1px solid #3BA639;
+                background-color: #3BA639;
+                color: $white;
+            }
+
+            &.incorrect {
+                border: 1px solid #BC253A;
+                background-color: #BC253A;
+                color: $white;
+            }
+        }
+    }
+    
+    .option.selected.correct,
+    .option.selected.incorrect {
+        cursor: default;
+        & > .option-label {
+            cursor: default;
+        }
+    }
+    
+    .option.disabled {
+        cursor: default;
+    
+        & > .option-label {
+            cursor: default;
+        }
+    }
+    
+    /* Измененные стили для radio-кнопок */
+    .option.disabled .custom-radio {
+        opacity: 0;
+    }
+    
+    /* Скрываем radio-кнопку браузера */
+    .radio-input {
+        display: none;
+    }
+    
+    /* Стили для радио-кнопок и иконок */
+    .custom-radio {
+        display: block;
+        flex-shrink: 0;
+        width: 23px;
+        height: 23px;
+        border: 2px solid $primary;
+        border-radius: 50%;
+        position: relative;
+    }
+    
+    .option-text {
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    /* Стили для feedback иконок */
+    .feedback-icon {
+        width: 28px;
+        height: 28px;
+        display: block;
+        position: absolute;
+        left: -1px;
+        top: auto;
+        bottom: auto;
+        @media (max-width:719px) {
+            left: -2px;
+            top: auto;
+            bottom: auto;
+        }
+    }
+    
+    .correct-icon, .incorrect-icon {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        background-color: $white;
+    }
+    
+    .correct-icon {
+        content: url(../img/correct.png);
+        background-size: contain;
+    }
+    
+    .incorrect-icon {
+        content: url(../img/incorrect.png);
+        background-size: contain;
+        
+    }
+    
+    .feedback-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .feedback-image {
+      max-width: 100px;
+      margin-bottom: 10px;
+    }
+    
+    .explanation {
+        padding: 30px;
+        color: $white;
+        background-color: $primary;
+        border-radius: 10px;
+        @media (max-width:719px) {
+            padding: 20px;
+        }
+    }
+    
+    .btn-pts {
+        margin: 0 auto;
+    }
+}

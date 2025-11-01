@@ -1,0 +1,8 @@
+.tile {
+    &_active {
+        cursor: pointer;
+    }
+    &:hover {
+        opacity: 70%;
+    }
+}

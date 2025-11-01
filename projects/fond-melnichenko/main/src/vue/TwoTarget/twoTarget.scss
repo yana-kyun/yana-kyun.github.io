@@ -1,0 +1,202 @@
+@use "../../style/_vars";
+@use "../../utils/variables/variables";
+
+.two {
+    &-task {
+        &-text {
+            display: flex;
+            width: 100%;
+            padding: 20px;
+            background-color: $light-gray;
+            border-radius: 8px;
+        }
+
+        &-container {
+            max-width: 788px;
+            gap: 40px;
+            @media (max-width:719px) {
+                gap: 20px;
+                max-width: 100%;
+            }
+        }
+        
+        &-img {
+            max-width: 40% !important;
+            position: relative;
+            top: 0;
+            left: 0;
+
+            @media (max-width:719px) {
+                max-width: 100% !important;
+            }
+        }
+    }
+
+    &-answers {
+        &-block {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+            
+            @media (max-width:719px) {
+                width: 100%;
+                gap: 7px;
+            }
+        }
+
+        &-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 50%;
+            
+            @media (max-width:719px) {
+                gap: 10px;
+            }
+        }
+
+        &-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        &-item {
+            width: 100%;
+            padding: 11px 35px;
+            border: 1px solid $light-gray;
+            border-radius: 8px;
+            cursor: pointer;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+
+        }
+    }
+
+    &-btn {
+        max-width: fit-content;
+        align-self: center;
+
+        &-common {
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px 9px 25px;
+            background-color: $white;
+            color: $primary;
+            border: 1px solid $primary ;
+            vertical-align: middle;
+            font-size: 14px;
+            text-transform: none;
+            text-shadow: none;
+            text-align: center;
+            text-decoration: none;
+            transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .25s ease-in-out, box-shadow .25s ease-in-out, transform .2s ease-in-out;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $primary;
+                color: $white;
+                @media (hover: none) and (pointer: coarse) {
+                    background-color: $white;
+                    color: $primary;
+                }
+            }
+
+            &.disabled {
+                opacity: .6;
+                pointer-events: none;
+
+                :hover {
+                    cursor: default;
+                }
+            }
+
+            @media (hover: none) and (pointer: coarse) {
+                .your-element:hover {
+                    /* Отключаем ховер-эффекты */
+                    background: none;
+                    transform: none;
+                    /* и т.д. */
+                }
+            }
+        }
+    }
+
+
+    &-explanation {
+        color: $white;
+        padding: 30px;
+        background-color: $primary;
+        border-radius: 10px;
+        @media (max-width:719px) {
+            padding: 30px 25px;
+        }
+    }
+}
+
+.two-radio-buttons {
+    display: flex;
+    gap: 10px; /* Отступ между кнопками */
+}
+
+.two-radio-button {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+}
+
+/* Скрываем настоящий радио-инпут */
+.two-radio-button input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Стили для "кнопки" (span) */
+.two-radio-button .two-button-text {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 11px 15px 8px;
+    border: 1px solid rgba(203, 219, 227, 1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* Стиль при выборе */
+.two-radio-button input:checked + .two-button-text {
+    background: $primary;
+    color: white;
+    border-color: $primary;
+}
+
+/* Эффект при наведении */
+.two-radio-button:hover .two-button-text {
+    @media #{$breakpoint-lg-only} {
+        background: #e0e0e0;
+    }
+  
+}
+
+.two-radio-button.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+    
+}
+
+.two-radio-button.correct input:checked + .two-button-text {
+    background-color: rgba(59, 166, 57, 1); /* Зеленый для правильных ответов */
+    color: white;
+    border-color: rgba(59, 166, 57, 1);
+}
+
+.two-radio-button.incorrect input:checked + .two-button-text {
+    background-color: rgba(188, 37, 58, 1); /* Красный для неправильных ответов */
+    color: white;
+    border-color: rgba(188, 37, 58, 1);
+}

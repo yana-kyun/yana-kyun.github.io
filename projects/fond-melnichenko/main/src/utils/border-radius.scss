@@ -1,0 +1,12 @@
+@import "./variables/_variables";
+@import "./mixins/margins-paddings-radius-name";
+
+@media #{$breakpoint-lg-only} {
+  // Margins
+  @include list-loop(".br-", "border-radius");
+}
+
+@media #{$breakpoint-xs-only} {
+  // Margins
+  @include list-loop(".br-xs-", "border-radius");
+}

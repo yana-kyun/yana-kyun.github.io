@@ -1,0 +1,18 @@
+@import "./variables/_variables";
+@import "./mixins/margins-paddings-radius-name";
+
+@media #{$breakpoint-lg-only} {
+  // Paddings
+  @include list-loop(".pt-", "padding-top");
+  @include list-loop(".pr-", "padding-right");
+  @include list-loop(".pb-", "padding-bottom");
+  @include list-loop(".pl-", "padding-left");
+}
+
+@media #{$breakpoint-xs-only} {
+  // Paddings
+  @include list-loop(".pt-xs-", "padding-top");
+  @include list-loop(".pr-xs-", "padding-right");
+  @include list-loop(".pb-xs-", "padding-bottom");
+  @include list-loop(".pl-xs-", "padding-left");
+}

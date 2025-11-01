@@ -1,0 +1,197 @@
+<script type="text/x-template" id="v-dialog-template">
+  <div :class="[addMargin ? 'mb-100 mb-xs-70' : '']">
+    <div>
+        <div
+          v-for="(question, keyQuestion) in testArray"
+          :key="keyQuestion"
+          v-show="isQuestionActive(keyQuestion)"
+        >
+          <div class="delayed-fade-in" v-show="isVisible">
+            <div class="w-100 flex flex-column">
+              <div :class="['flex', (shouldRemoveMargin(keyQuestion, question) && removeMargin) ? 'mb-0 mb-xs-0' : 'mb-60 mb-xs-40']">
+                <div class="mr-35 mr-xs-0">
+                  <img
+                    class="img img-round reset-mw hide-xs"
+                    :src="question.imgPers || 'user/img/pers/img-male-round-1_left.png'"
+                    width="130"
+                  >
+                </div>
+    
+                <!-- Вопрос -->
+                <div class="flex flex-column dialog-gap dialog-basis mt-30">
+                    <div class="dialog-question-block dialog-question-block-left">
+                    
+                        <!-- First Text -->
+                        <div 
+                            v-if="(isQuestionCompleted(keyQuestion) || showFirstText || showSecondText) && question.firstText?.length"
+                            class="flex flex-column dialog-gap-10-5"
+                        >
+                            <template v-for="(item, itemIndex) in getFirstTextToShow(keyQuestion, question)">
+                                <div
+                                    v-for="(bubble, bubbleIndex) in item.text"
+                                    v-show="isQuestionCompleted(keyQuestion) || shouldShowFirstBubble(itemIndex, bubbleIndex)"
+                                    :key="`first-${itemIndex}-${bubbleIndex}`"
+                                    class="dialog-block dialog-block-left"
+                                >
+                                    <div 
+                                        class="dialog-bubble dialog-animated"
+                                        :style="{ animationDelay: isQuestionCompleted(keyQuestion) ? '0s' : getFirstBubbleDelay(itemIndex, bubbleIndex) }"
+                                    >
+                                        <div class="dialog-tail dialog-tail-left"></div>
+                                        <div 
+                                            v-if="itemIndex === 0 && bubbleIndex === 0" 
+                                            class="text-xs text-bold text-primary hide-lg" 
+                                            v-html="persName"
+                                        ></div>
+                                        
+                                        <div class="text-m" v-html="bubble.bubbleText"></div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+    
+                        <!-- Second Text -->
+                        <div 
+                        v-if="(showSecondText || isQuestionCompleted(keyQuestion)) && question.secondText?.length"
+                        class="flex flex-column dialog-gap-10-5"
+                        >
+                            <div
+                                v-for="(text, index) in question.secondText"
+                                v-show="isQuestionCompleted(keyQuestion) || index <= currentSecondTextIndex"
+                                :key="`second-${index}`"
+                                class="dialog-block dialog-block-left"
+                            >
+                                <div 
+                                class="dialog-bubble dialog-animated"
+                                :class="text.text === '' ? 'hidden' : ''"
+                                :style="{ animationDelay: isQuestionCompleted(keyQuestion) ? '0s' : getSecondBubbleDelay(index) }"
+                                >
+                                    <div class="dialog-tail dialog-tail-left"></div>
+                                    <div 
+                                        v-if="index === 0 && (!question.firstText || !question.firstText.length)" 
+                                        class="text-xs text-bold text-primary hide-lg" 
+                                        v-html="persName"
+                                    ></div>
+                                    <div class="text-m" v-html="text.text"></div>
+                                </div>
+    
+                                <!-- Результат для заключения -->
+                                <div class="dialog-animated" v-if="text.results == true">
+                                    <div class="dialog-results">
+                                        <p class="text-30-22 text-bold">
+                                            {{ "Решено" + " " + `${resultsListArray.length} ` + " " + "из" + " " + `${skills.length}` }}
+                                        </p>
+                                        <p class="text-m text-bold" v-if="resultsListArray.length > 0">
+                                            У&nbsp;тебя уже сейчас хорошо получается
+                                        </p>
+                                        <div class="dialog-results-list">
+                                            <div class="dialog-results-item" v-for="(item, keyItem) in resultsListArray">
+                                                <p class="text text-m" v-html="item"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+                        
+                        <div 
+                            class="dialog-bubble"
+                            v-if="shouldShowTypingIndicator(keyQuestion)"
+                        >
+                            <div class="dialog-tail dialog-tail-left">
+                            </div>
+                            <div class="indicator-block">
+                                <div class="typing-indicator">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <!-- Варианты ответа -->
+                    <div
+                        class="dialog-answers"
+                        v-if="question.answersVisible && keyQuestion === currentQuestionIndex"
+                    >
+                        <div
+                            class="dialog-radio-buttons"
+                            v-for="(answer, keyAnswer) in question.answers"
+                            :key="'answer-' + keyAnswer"
+                        >
+                        <label
+                            class="dialog-radio-button"
+                            :for="'radio'+keyQuestion+''+keyAnswer"
+                        >
+                            <input
+                            type="radio"
+                            @change="isTarget($event, keyAnswer, question.type, answer.text)"
+                            :checked="answer.selected"
+                            :id="'radio'+keyQuestion+''+keyAnswer"
+                            :value="keyAnswer"
+                            :disabled="question.disabled"
+                            :name="'radio'+keyQuestion"
+                            >
+                            <span class="dialog-button-text" v-html="answer.text"></span>
+                        </label>
+                        </div>
+                    </div>
+                    
+                </div>
+              </div>
+    
+              <!-- Feedback -->
+              <div
+                :class="['dialog-feedback delayed-fade-in', removeMargin && keyQuestion >= testArray.length-1  ? 'mb-0 mb-xs-0' : 'mb-60 mb-xs-40']"
+                v-if="
+                    (feedbackAnswerShow && keyQuestion === currentQuestionIndex) || 
+                    (isQuestionCompleted(keyQuestion) && question.feedback)
+                "
+              >
+                <div class="flex flex-row-reverse">
+                  <div class="ml-35 ml-xs-0">
+                    <img
+                      class="img img-round reset-mw hide-xs"
+                      :src="question.imgPers2 || 'user/img/pers/img-cat-round-1_right.png'"
+                      width="130"
+                    >
+                  </div>
+                  <div class="flex flex-column dialog-gap dialog-basis mt-30">
+                    <div class="dialog-question-block dialog-question-block-right">
+                      <div class="dialog-block dialog-block-right">
+                        <div class="dialog-bubble">
+                          <div class="text-m" v-html="question.feedback"></div>
+                          <div class="dialog-tail dialog-tail-right"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row mt-100 mt-xs-70" v-if="showFinalButton && nextBtnOff">
+        <div class="col-lg-3 col-xs-0"></div>
+        <div class="col-lg-18 col-xs-12">
+            <!-- Кнопка "К заданиям" -->
+            <div class="dialog-answers jc-center">
+                <div class="dialog-radio-buttons">
+                <button 
+                    class="dialog-radio-button" 
+                    @click="nextSlide()"
+                >
+                    <span class="dialog-button-text" v-html="nextBtnText">
+                    </span>
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="js-auto-scroll"></div>
+  </div>
+</script>

@@ -1,0 +1,80 @@
+<script type="text/x-template" id="v-bingo-template">
+    <div id="bingo-app">
+        <div class="bingo-container">
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <!-- Картинки для выбора -->
+                    <div class="bingo-grid" :style="bingoGridStyle">
+                        <div 
+                            v-for="(card, index) in bingoArray" 
+                            :key="index" 
+                            class="bingo-item"
+                            :class="getImageClasses(index)"
+                            @click="toggleImage(index)"
+                            @mouseover="hoverIndex = index"
+                            @mouseleave="hoverIndex = null"
+                        >
+                            <h4 class="text-center">{{ card.text }}</h4>
+                            <div class="feedback-icon img_center">
+                                <div v-if="showFeedback && selectedItems.includes(index)" 
+                                    class="icon-status" 
+                                    :class="card.correct ? 'icon-correct' : 'icon-incorrect'">
+                                    <img class="w-100" :src="card.correct ? 'user/img/icon/icon-correct-multiple-image.svg' 
+                                                        : 'user/img/icon/icon-incorrect-multiple-image.svg'">
+                                </div>
+                                <img v-else class="icon-checked w-100" src="user/img/icon/icon-checked-primary.svg">
+                                <!-- <div v-else class="icon-status"
+                                    :class="{
+                                        'select': selectedItems.includes(index),
+                                        'hover': hoverIndex === index
+                                    }">
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Обратная связь -->
+            <div class="w-100">
+                <div class="flex flex-column-xs js-scroll-feedback mt-60 mt-xs-40" v-if="showFeedback">
+                    <div class="order-xs-2 align-vertical">
+                        <div class="mr-30">
+                            <img :src="isCorrect ? feedback.imgPersCorrect : feedback.imgPersIncorrect" width="130" />
+                        </div>
+                    </div>
+                    <div class="w-xs-100 order-xs-1 mb-xs-20 align-center align-vertical">
+                        <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                            <div class="text-m">
+                                {{ isCorrect ? feedback.textCorrect : feedback.textIncorrect }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <div class="flex jc-center">
+                        <!-- Кнопка принять/повторить -->
+                        <button 
+                            v-if="showSubmitButton" 
+                            @click="checkAnswer" 
+                            class="btn btn-common btn-common__text btn-common_border mt-40 mt-xs-20 mb-xs-20"
+                        >
+                            Принять ответ
+                        </button>
+            
+                        <button 
+                            v-else-if="showFeedback && !isCorrect && attemptsLeft > 0" 
+                            @click="resetSelection"
+                            class="btn btn-common btn-common__text btn-common_border mt-60 mt-xs-45 mb-xs-20"
+                        >
+                            Попробовать ещё раз
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

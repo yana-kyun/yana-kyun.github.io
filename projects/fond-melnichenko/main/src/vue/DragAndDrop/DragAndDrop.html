@@ -1,0 +1,63 @@
+<script type="text/x-template" id="v-drag-and-drop-template">
+    <div class="container">
+        <div v-show="!feedbackShow">
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <h3 class="text-center mb-20 mb-xs-20">{{dropArray[cQuestion].text}}</h3>
+                </div>
+                <!-- <h4>{{cQuestion + 1}}/{{dropArray.length}}</h4> -->
+                
+            </div>
+            <div class="dragAndDrop__body">
+                <div :class="['', {'disable': draggableDisable}]">
+                    <div :class="['row center', {'mb-20 mb-xs-20' : key < dropArray[cQuestion].droppable.length - 1}]" v-for="(droppable, key) in dropArray[cQuestion].droppable">
+                        <div class="col-lg-24 col-xs-12">
+                            <div class="row center">
+                                <div class="col-lg-16 col-xs-12">
+                                    {{droppable.text}}
+                                    {{dropArray[cQuestion].droppable.length}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-8 col-xs-6">
+                            <div class="dragAndDrop__item js-droppable-item">
+                                <div class="dragAndDrop__droppable js-droppable":data-id="droppable.position">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-8 col-xs-6 js-draggable-container">
+                            <div class="dragAndDrop__draggable js-draggable" :data-id="dropArray[cQuestion].draggable[key].position">
+                                {{dropArray[cQuestion].draggable[key].text }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-24 col-xs-12">
+                        <div class="row center">
+                            <div class="col-lg-8 col-xs-12"></div>
+                            <div class="col-lg-8 col-xs-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dragAndDrop__footer">
+                <button class="btn" v-if="btnAccept" @click="accept()">Принять</button>
+                <button class="btn" v-if="btnReset" @click="reset()">Сбросить</button>
+                <button class="btn" v-if="btnNext" @click="next()">Продолжить</button>
+            </div>
+        </div>
+        <div class="test-feedback" v-if="feedbackShow">
+            <div class="test-feedback__header">
+                <h3>Обратная связь</h3>
+            </div>
+            <div class="test-feedback__content">
+                Правильно {{ corrQuestion }} из {{ dropArray.length }}
+            </div>
+            <div class="test-feedback__footer">
+                <button class="btn" @click="nextSlide()">Продолжить</button>
+                <button class="btn" @click="resetDraggable()">Повторить</button>
+            </div>
+        </div>
+    </div>
+</script>

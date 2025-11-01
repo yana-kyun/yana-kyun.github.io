@@ -1,0 +1,146 @@
+@import "../../style/_vars";
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  font-family: inherit;
+  font-size: inherit;
+  vertical-align: middle;
+  cursor: pointer;
+
+  .selected-option {
+    max-width: 500px;
+    min-height: 43px;
+    padding: 8px 0px 8px 16px;
+    border: 1px solid #CBDBE3;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+    position: relative;
+    
+    @media #{$breakpoint-xs-only} {
+        max-width: 80dvw;
+        min-height: 36px;
+    }
+
+    .selected-text {
+    }
+    
+    .dropdown-arrow {
+      // margin-left: 10px;
+      transition: transform 0.2s;
+      font-size: 0.8em;
+      position: absolute;
+      right: 10px;
+    }
+  }
+  
+  &.is-open {
+    .selected-option {
+      border-color: $primary;
+      
+      .dropdown-arrow {
+        transform: rotate(180deg);
+      }
+    }
+    
+    .options-list {
+      display: block;
+    }
+  }
+  
+  &.is-disabled {
+    pointer-events: none;
+  }
+  
+  &.correct {
+    .selected-option {
+      border-color: #3BA639;
+      background-color: #3BA639;
+      color: white;
+    }
+  }
+  
+  &.incorrect {
+    .selected-option {
+      border-color: #BC253A;
+      background-color: #BC253A;
+      color: white;
+    }
+  }
+  
+  .options-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: fit-content;
+    overflow-y: auto;
+    margin: 5px 0 0;
+    padding: 5px 0;
+    border: 1px solid #CBDBE3;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    list-style: none;
+    display: none;
+  }
+  
+  .option-item {
+    padding: 8px 16px;
+    transition: all 0.2s;
+    
+    &:hover {
+      background-color: #CBDBE3;
+    }
+    
+    &.is-selected {
+      background-color: $primary;
+      color: white;
+    }
+  }
+}
+
+// Анимация для выпадающего списка
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.3s ease;
+}
+
+.dropdown-enter,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.text-with-gaps {
+  line-height: 250% !important;
+  
+  .custom-select {
+    margin: 0 2px;
+    vertical-align: middle;
+  }
+}
+
+.pdd {
+  &-btn {
+    display: flex;
+    max-width: fit-content;
+    margin: auto;
+  }
+}
+
+.drop_down-list {
+  .custom-select {
+    width: 100%;
+  }
+}
+
+.opacity {
+    opacity: 0;
+}

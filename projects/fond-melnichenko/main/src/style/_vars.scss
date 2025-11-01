@@ -1,0 +1,90 @@
+// converting px-to-rem
+$body-fs: 16px;
+$body-lh: 24px;
+//font-size
+$fs10: 10px !important;
+$fs12: 12px !important;
+$fs14: 14px !important;
+$fs16: 16px !important;
+$fs18: 18px !important;
+$fs22: 22px !important;
+$fs30: 30px !important;
+$fs38: 38px !important;
+$fs50: 50px !important;
+$fs80: 80px !important;
+
+//line-height
+$lh14: 14px;
+$lh16: 16px;
+$lh17: 17px;
+$lh20: 20px;
+$lh21: 21px;
+$lh24: 24px;
+$lh26: 26px;
+$lh27: 27px;
+$lh30: 30px;
+$lh31: 31px;
+$lh32: 32px;
+$lh40: 40px;
+$lh50: 50px;
+$lh62: 62px;
+$lh100: 100px;
+
+//colors
+$black: rgba(0, 0, 0, 1);
+$white: rgba(255, 255, 255, 1);
+$blue-gray-1: rgba(91, 101, 109, 1);
+$blue-gray-2: rgba(55, 60, 64, 1);
+$gray-1: rgba(73, 73, 73, 1);
+$gray-2: rgba(105, 105, 108, 1);
+$gray-3: rgba(194, 195, 198, 1);
+$gray-4: rgba(236, 236, 238, 1);
+$gray-5: rgba(243, 243, 243, 1);
+$gray-6: rgba(179, 179, 179, 1);
+$gray-7: rgba(214, 214, 214, 1);
+$gray-8: rgba(204, 220, 220, 1);
+$gray-9: rgba(249, 249, 249, 1);
+$light-gray: rgba(244, 244, 244, 1);
+$grey-practice: rgba(123, 129, 133, 1); //#7B8185
+$red: rgba(233, 38, 45, 1);
+$green: rgba(115, 190, 67, 1);
+$red-2: rgba(188, 37, 58, 1);
+$green-2: rgba(59, 166, 57, 1);
+$beige: rgba(255, 239, 224, 1);
+$blue: rgba(45, 160, 242, 1);
+$corn: rgba(42, 55, 125, 1);
+$candy: rgba(0, 177, 240, 1);
+$agua: rgba(175, 224, 244, 1);
+$pale: rgba(224, 241, 248, 1);
+$purple: rgba(142, 0, 254, 1);
+$light-purple-1: rgba(232, 204, 255, 1);
+$light-purple-2: rgba(243, 237, 248, 1);
+$turquoise: rgba(216, 253, 242, 1);
+$turquoise-2: #68FFDA;
+
+$neutral: #1e1f1f;
+$primary: #004F50;
+$dark-violet: #0D0417;
+$light-gray-2: #CBDBE3;
+
+
+$speech-tail-color: rgba(0, 0, 0, 0.2);
+$speech-border-color: rgba(0, 0, 0, 0.07);
+
+// font-family
+$Regular: "Montserrat-Regular", sans-serif;
+$Bold: "Montserrat-Bold", sans-serif;
+
+//bg-color
+$bg-color: (
+  "black": rgba(0, 0, 0, 1),
+  "white": rgba(255, 255, 255, 1),
+  "white-95": rgba(255, 255, 255, 0.95),
+  "red": rgba(233, 38, 45, 1),
+  "light-gray": $light-gray,
+  "gray-8": $gray-8,
+  "gray-9": $gray-9,
+  "turquoise": $turquoise,
+  "primary": $primary,
+  "dark-violet": $dark-violet,
+);

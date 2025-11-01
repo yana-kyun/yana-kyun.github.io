@@ -1,0 +1,84 @@
+<script type="text/x-template" id="v-two-template">
+    <div class="flex flex-column ai-center">
+        <div class="two-task-container flex flex-column">
+            <div class="two-task-text text-xl" v-html="taskText.text">
+            </div>
+            <div class="flex flex-column-xs content-between ai-center gap-20 mb-xs-20">
+                <img :src="taskText.image" class="two-task-img">
+                <div class="two-answers-block">
+                    <div class="two-answers-column" 
+                        v-for="(answers, keyAnswers) in answersStorage" 
+                        :key="keyAnswers"
+                    >
+                        <div class="text-xl text-bold text-center" v-html="answers.title"></div>
+                        <div class="two-answers-items">
+                            <div
+                                class="two-radio-buttons"
+                                v-for="(option, keyOption) in answers.options"
+                                :key="'answer-' + keyOption"
+                            >
+                                <label
+                                    class="two-radio-button"
+                                    :for="'radio-' + keyAnswers+ '-' + keyOption"
+                                    :class="{ 
+                                        'disabled': isSubmitted && !option.selected,
+                                        'correct': isSubmitted && option.selected && option.correct,
+                                        'incorrect': isSubmitted && option.selected && !option.correct
+                                    }"
+                                >
+                                    <input
+                                        type="radio"
+                                        @change="selectOption(keyAnswers, keyOption)"
+                                        :checked="option.selected"
+                                        :id="'radio-' + keyAnswers+ '-' + keyOption"
+                                        :value="keyOption"
+                                        :name="'radio-group-' + keyAnswers"
+                                        :disabled="isSubmitted"
+                                    >
+                                    <span class="two-button-text text-l" v-html="option.text"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button 
+                class="two-btn two-btn-common"
+                :class="{ 'disabled': !hasSelection }"
+                @click="acceptAnswer"
+                v-if="!isSubmitted && attemptsLeft > 0"
+            >
+                Принять ответ
+            </button>
+            <button 
+                class="two-btn two-btn-common" 
+                @click="resetTask"
+                v-if="showTryAgain"
+            >
+                Попробовать ещё раз
+            </button>
+        </div>
+        
+        <div class="w-100 mt-60 mt-xs-40">
+            <div class="flex flex-column-xs mb-60 mb-xs-20 js-scroll-feedback" v-if="showFeedback">
+                <div class="order-xs-2 align-vertical">
+                    <div class="mr-30">
+                        <img :src="feedback.imgPers" width="130" />
+                    </div>
+                </div>
+                <div class="w-xs-100 order-xs-1 mb-xs-20 align-center align-vertical">
+                    <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                        <div class="text-m" v-html="feedbackText">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="two-task-container mb-60 mb-xs-20">
+            <div class="flex content-center" v-if="showExplanation">
+                <div class="two-explanation" v-html="explanation.text"></div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,84 @@
+<script type="text/x-template" id="v-multiple-image-template">
+    <div id="multiple-image-app">
+        <div class="multiple-img-container">
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <!-- Картинки для выбора -->
+                    <div class="multiple-image-grid" :style="multipleImageGridStyle">
+                        <div 
+                            v-for="(img, index) in imageArray" 
+                            :key="index" 
+                            class="multiple-image-item"
+                            :class="{
+                                ...getImageClasses(index),
+                                'disabled': showFeedback
+                            }"
+                            @click="!showFeedback && toggleImage(index)"
+                            @mouseover="!showFeedback && (hoverIndex = index)"
+                            @mouseleave="!showFeedback && (hoverIndex = null)"
+                        >
+                            <img :src="img.src" alt="" :class="['multiple-image-img', {'hide-xs' : !isDescScreen && img.srcXs != undefined && img.srcXs != ''}]">
+                            <img :src="img.srcXs" alt="" :class="['multiple-image-img', {'hide-lg' : isDescScreen}]">
+                            <div class="feedback-icon">
+                                <div v-if="showFeedback && selectedImages.includes(index)" 
+                                    class="icon-status" 
+                                    :class="img.correct ? 'icon-correct' : 'icon-incorrect'">
+                                    <img :src="img.correct ? 'user/img/icon/icon-correct-multiple-image.svg' 
+                                                        : 'user/img/icon/icon-incorrect-multiple-image.svg'">
+                                </div>
+                                <div v-else class="icon-status icon-default"
+                                    :class="{
+                                        'select': selectedImages.includes(index),
+                                        'hover': hoverIndex === index && !showFeedback
+                                    }" 
+                                    v-html="index + 1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Обратная связь -->
+            <div class="w-100">
+                <div class="flex flex-column-xs js-scroll-feedback mt-60 mt-xs-40" v-if="showFeedback">
+                    <div class="order-xs-2 align-vertical">
+                        <div class="mr-30">
+                            <img :src="isCorrect ? feedback.imgPersCorrect : feedback.imgPersIncorrect" width="130" />
+                        </div>
+                    </div>
+                    <div class="w-xs-100 order-xs-1 align-center align-vertical mb-xs-20">
+                        <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                            <div class="text-m">
+                                {{ isCorrect ? feedback.textCorrect : feedback.textIncorrect }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row center" v-if="showSubmitButton || (showFeedback && !isCorrect && attemptsLeft > 0)">
+                <div class="col-lg-16 col-xs-12">
+                    <div class="flex jc-center">
+                        <!-- Кнопка принять/повторить -->
+                        <button 
+                            v-if="showSubmitButton" 
+                            @click="checkAnswer" 
+                            class="btn btn-common btn-common__text btn-common_border mt-40 mt-xs-20 mb-xs-20"
+                        >
+                            Принять ответ
+                        </button>
+            
+                        <button 
+                            v-else-if="showFeedback && !isCorrect && attemptsLeft > 0" 
+                            @click="resetSelection"
+                            class="btn btn-common btn-common__text btn-common_border mt-60 mt-xs-45 mb-xs-20"
+                        >
+                            Попробовать ещё раз
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

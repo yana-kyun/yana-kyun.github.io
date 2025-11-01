@@ -1,0 +1,106 @@
+<script type="text/x-template" id="v-test-btn-practice-template">
+    <div class="js-hide-reveal" data-hidden-id="js-test-btn-practice-top">
+        <div :class="['btn-choice js-hide-reveal', {'mb-60 mb-xs-40' : keyQuestion < questions.length - 1}]" v-for="(question, keyQuestion) in questions" :key="keyQuestion" v-if="keyQuestion <= counterQuestion" :data-hidden-id="'js-test-btn-practice-question' + keyQuestion">
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <!-- Текст вопроса -->
+                    <div class="text-xl text-bold text-primary text-center mb-30 mb-xs-20" v-if="showQuestionText && question.title">
+                        {{ question.title }}
+                    </div>
+                    
+                    <!-- Варианты ответов -->
+                    <div class="option-container" :style="testGridStyle">
+                        <div
+                                v-for="(option, index) in question.options" 
+                                :key="index+keyQuestion" >
+                            <div 
+                                class="option h-100"
+                                :class="{
+                                    'was-selected': selectedIndexArray[keyQuestion] === index,
+                                    'selected': selectedIndex === index && keyQuestion === counterQuestion,
+                                    'correct': checkedQuestion[keyQuestion] && option.correct && isCorrect[question.id] && showFeedback,
+                                    'incorrect': checkedQuestion[keyQuestion] && !option.correct && !isCorrect[question.id] && showFeedback,
+                                    'disabled pe-none': checkedQuestion[keyQuestion],
+                                }"
+                            >
+                                <label class="option-text text-xl">
+                                    <input 
+                                        type="radio" 
+                                        :name="'option-' + _uid" 
+                                        :value="index" 
+                                        v-model="selectedIndex"
+                                        :disabled="(checkedQuestion[keyQuestion] || attemptsLeft === 0) && keyQuestion != counterQuestion"
+                                        class="radio-input"
+                                    />
+                                    <span class="">{{ option.text }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Обратная связь -->
+            <div class="w-100">
+                <div class="flex flex-column-xs js-scroll-feedback mt-60 mt-xs-40" v-if="showFeedback && keyQuestion >= questions.length - 1">
+                    <div class="order-xs-2 align-vertical">
+                        <div class="mr-30">
+                            <img :src="feedbackImage" width="130" />
+                        </div>
+                    </div>
+                    <div class="w-xs-100 order-xs-1 mb-xs-20 align-center align-vertical">
+                        <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                            <div class="text-m">
+                                {{ isCorrectTest ? correctFeedbackText : incorrectFeedbackText }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <!-- Пояснение -->
+                    <div v-if="showExplanation && explanation !== ''" class="explanation mt-60 mt-xs-40">
+                        <p class="text text-m" v-html="explanation">
+                        </p>
+                    </div>
+                    
+                    <div class="flex jc-center">
+                        <!-- Кнопка принять/повторить -->
+                        <button 
+                            v-if="showSubmitButton && keyQuestion === counterQuestion" 
+                            @click="checkAnswer" 
+                            class="btn btn-common btn-common__text btn-common_border mt-40 mt-xs-20 mb-xs-20"
+                        >
+                            Принять ответ
+                        </button>
+            
+                        <button 
+                            v-else-if="checkedQuestion[keyQuestion] && counterQuestion == keyQuestion && keyQuestion < questions.length - 1" 
+                            @click="nextQuestion"
+                            class="btn btn-common btn-common__text btn-common_border mt-40 mt-xs-20 mb-xs-20"
+                        >
+                            Дальше
+                        </button>
+                        <!-- <button 
+                            v-if="showFeedback[keyQuestion] && counterQuestion == keyQuestion" 
+                            @click="nextQuestion"
+                            class="btn btn-common btn-common__text btn-common_border mt-60 mt-xs-45 mb-xs-20"
+                        >
+                            {{ keyQuestion }}
+                            {{ questions.length - 1 }}
+                        </button> -->
+                        <button 
+                            v-else-if="showFeedback && !isCorrectTest && attemptsLeft > 0 && keyQuestion >= questions.length - 1" 
+                            @click="resetSelection"
+                            class="btn btn-common btn-common__text btn-common_border mt-60 mt-xs-45 mb-xs-20"
+                        >
+                            Попробовать ещё раз
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

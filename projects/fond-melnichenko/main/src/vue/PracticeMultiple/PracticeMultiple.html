@@ -1,0 +1,108 @@
+<script type="text/x-template" id="v-test-multiple-template">
+    <div id="test-multiple-app">
+        <div class="multiple-choice">
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <!-- Текст вопроса -->
+                    <div class="text-xl mb-30 mb-xs-20" v-if="questionText !== ''">
+                        {{ questionText }}
+                    </div>
+                    
+                    <!-- Подсказка -->
+                    <div class="hint-pts text-s" v-if="showHint && hintText">
+                        {{ hintText }}
+                    </div>
+                    
+                    <!-- Варианты ответов -->
+                    <div class="options-container">
+                        <div 
+                            v-for="(option, index) in options" 
+                            :key="index" 
+                            class="option"
+                            :class="{
+                                'selected': selectedIndices.includes(index),
+                                'correct': showFeedback && option.correct,
+                                'incorrect': showFeedback && !option.correct && selectedIndices.includes(index),
+                                'disabled': showFeedback
+                            }"
+                        >
+                            <label class="option-label">
+                                <input 
+                                    type="checkbox" 
+                                    :name="'option-' + _uid" 
+                                    :value="index" 
+                                    v-model="selectedIndices"
+                                    :disabled="showFeedback || attemptsLeft === 0"
+                                    class="checkbox-input"
+                                />
+                                <div class="custom-checkbox"></div>
+                                <span class="option-text text-xl">{{ option.text }}</span>
+                                <div 
+                                    v-if="showFeedback && selectedIndices.includes(index)" 
+                                    class="feedback-icon"
+                                >
+                                    <span 
+                                        v-if="option.correct" 
+                                        class="correct-icon"
+                                    ></span>
+                                    <span 
+                                        v-else 
+                                        class="incorrect-icon"
+                                    ></span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Обратная связь -->
+            <div class="w-100">
+                <div class="flex flex-column-xs js-scroll-feedback mt-60 mt-xs-40" v-if="showFeedback">
+                    <div class="order-xs-2 align-vertical">
+                        <div class="mr-30">
+                            <img :src="feedbackImage" width="130" />
+                        </div>
+                    </div>
+                    <div class="w-xs-100 order-xs-1 mb-xs-20 align-center align-vertical">
+                        <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                            <div class="text-m">
+                                {{ isCorrect ? correctFeedbackText : incorrectFeedbackText }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row center">
+                <div class="col-lg-16 col-xs-12">
+                    <!-- Пояснение -->
+                    <div v-if="showExplanation && explanation !== ''" class="explanation mt-60 mt-xs-40">
+                        <p class="text text-m" v-html="explanation">
+                        </p>
+                    </div>
+                    
+                    <div class="flex jc-center">
+                        <!-- Кнопка принять/повторить -->
+                        <button 
+                            v-if="showSubmitButton" 
+                            @click="checkAnswer" 
+                            class="btn btn-common btn-common__text btn-common_border mt-40 mt-xs-20 mb-xs-20"
+                            :disabled="selectedIndices.length === 0"
+                        >
+                            Принять ответ
+                        </button>
+            
+                        <button 
+                            v-else-if="showFeedback && !isCorrect && attemptsLeft > 0" 
+                            @click="resetSelection"
+                            class="btn btn-common btn-common__text btn-common_border mt-60 mt-xs-40 mb-xs-20"
+                        >
+                            Попробовать ещё раз
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

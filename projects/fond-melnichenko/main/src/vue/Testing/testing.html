@@ -1,0 +1,321 @@
+<script type="text/x-template" id="v-test-template">
+    <div class="test__container">
+        <div class="test__body"
+             v-if="keyQuestion === counterQuestion"
+             v-for="(question, keyQuestion) in testArray">
+  
+            <div class="row mb-10 mb-xs-10" v-if="(feedbackType === 'ancet' && testType !=='questionnaire') || questionNum">
+                <div class="col-12">
+                    <!--Счётчик вопросов-->
+                    <p class="text-m text-gray-light">{{ counterQuestion + 1 + '/' + testArray.length }}</p>
+                </div>
+            </div>
+            <div class="row mb-60 mb-xs-45" v-if="storyMod">
+                <div class="col-12 mb-60 mb-xs-45" v-if="testArray.length > 1 && questionNum">
+                    <!--Счётчик вопросов-->
+                    <p class="text-l text-gray-light">{{ counterQuestion + 1 + '/' + testArray.length }}</p>
+                </div>
+                <!--Story title-->
+                <div class="col-12 mb-60 mb-xs-45" v-if="question.storyTitle" v-html="question.storyTitle">
+                </div>
+                <div class="col-lg-12 col-xs-12 mb-xs-25"  v-show="question.storyImg !== ''">
+                    <picture class="main-people__charset">
+                        <img class="img_center" :src="question.storyImg" alt="Персонаж"/>
+                    </picture>
+                </div>
+                <div class="col-lg-12 col-xs-12 align-center" v-show="question.storyText !==''" v-html="question.storyText">
+  
+                </div>
+            </div>
+            <div class="row" v-if="testType === 'questionnaire'">
+                <div class="col-lg-4 hide-xs">&nbsp;</div>
+                <div class="col-lg-16 col-xs-12">
+                    <!--Счётчик вопросов-->
+                    <p class="text-m text-gray-light mb-30 mb-xs-25">{{ counterQuestion + 1 + '/' + testArray.length }}</p>
+                    <!--Text вопроса-->
+                    <h4 class="mb-30 mb-xs-25">{{ question.text }}</h4>
+  
+                                        <!--Radio ответы-->
+                    <div class="test__answers" v-if="question.type === 'radio'">
+                        <div class="radio questionnaire" v-for="(answer, keyAnswer) in question.answers">
+                            <input type="radio"
+                                   @change="isTarget($event, keyAnswer, question.type)"
+                                   :checked="answer.selected"
+                                   :id="'radio'+question.name+''+keyAnswer"
+                                   :value="keyAnswer"
+                                   :disabled="disableInput"
+                                   :name="'radio'+question.name">
+                            <label :class="['text-m', {'correct' : (answer.selected && answer.correct && btnNext)}, {'incorrect' : (answer.selected && !answer.correct && btnNext)}]"
+                                   :for="'radio'+question.name+''+keyAnswer">{{ answer.text }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+            <div class="row" v-else>
+                <div class="col-12">
+                    <!--Text вопроса-->
+                    <p class="text text-l mb-30 mb-xs-20">{{ question.text }}</p>
+                    <p class="text-info-start text-s mb-20 mb-xs-25" 
+                        v-if="!question.supText && testType !=='questionnaire' && question.type !=='sortable'"
+                    >
+                        {{question.type === 'checkbox' ? 'Выбери несколько вариантов' : 'Выбери один ответ'}}
+                    </p>
+                    <p class="text-s text-gray-light mb-30 mb-xs-25">
+                        {{question.supText}}
+                    </p>
+                    <hr class="border-gray mb-30 mb-xs-25" v-if="question.type === 'sortable'"/>
+                </div>
+                <div class="col-12">
+                    <!--Radio ответы-->
+                    <div class="test__answers" v-if="question.type === 'radio'">
+                        <div class="radio" v-for="(answer, keyAnswer) in question.answers">
+                            <input type="radio"
+                                   @change="isTarget($event, keyAnswer, question.type)"
+                                   :checked="answer.selected"
+                                   :id="'radio'+question.name+''+keyAnswer"
+                                   :value="keyAnswer"
+                                   :disabled="disableInput"
+                                   :name="'radio'+question.name">
+                            <label v-if="tick" :class="['text-m', {'correct_sel' : (answer.selected && answer.correct && isTicked)}, {'correct_show' : (!answer.selected && answer.correct && isTicked)}, {'incorrect_sel' : (answer.selected && !answer.correct && isTicked)}]"
+                                   :for="'radio'+question.name+''+keyAnswer">{{ answer.text }}</label>
+                            <!-- <label v-if="tick" :class="['text-m', {'correct_sel' : (answer.selected && answer.correct && ((btnNext || btnReset)))}, {'correct_show' : (!answer.selected && answer.correct && (btnNext || btnReset))}, {'incorrect_sel' : (answer.selected && !answer.correct && (btnNext || btnReset))}]"
+                                   :for="'radio'+question.name+''+keyAnswer">{{ answer.text }}</label> -->
+                            <label v-else :class="['text-m', {'correct' : (answer.selected && answer.correct && btnNext)}, {'incorrect' : (answer.selected && !answer.correct && btnNext)}]"
+                                   :for="'radio'+question.name+''+keyAnswer">{{ answer.text }}</label>
+                        </div>
+                    </div>
+  
+                    <!--Checkbox ответы-->
+                    <div class="test__answers" v-if="question.type === 'checkbox'">
+                        <div class="checkbox" v-for="(answer, keyAnswer) in question.answers">
+                            <input type="checkbox"
+                                   @change="isTarget($event, keyAnswer, question.type)"
+                                   :checked="answer.selected"
+                                   v-model="answer.selected"
+                                   :id="'checkbox'+question.name+''+keyAnswer"
+                                   :value="keyAnswer"
+                                   :disabled="disableInput"
+                                   :name="'checkbox'+question.name+''+keyAnswer">
+  
+                            <label v-if="tick && (feedbackType === 'femaleDialogChecked' || 'femaleDialog')"
+                                   :class="['text-m', {'correct_sel' : (answer.selected && answer.correct && feedbackShow)}, {'incorrect_sel' : (answer.selected && !answer.correct && feedbackShow)}]"
+                                   :for="'checkbox'+question.name+''+keyAnswer">{{ answer.text }}</label>
+                            <label v-else
+                                   :class="['text-m', {'correct' : (answer.selected && answer.correct && btnNext)}, {'incorrect' : (answer.selected && !answer.correct && btnNext)}]"
+                                   :for="'checkbox'+question.name+''+keyAnswer">{{ answer.text }}</label>
+                        </div>
+                    </div>
+  
+  
+                        <div class="test__answers" v-if="question.type === 'sortable'">
+                            <v-sortable
+                              :attempt="attempt"
+                              :check-answer="true"
+                              :question-storage="question"
+                              :random="true"
+                              :standalone="false"
+                              :show-correct="true"
+                              :feedback-show="true"
+                              @callParentMethod="nextQuestion"
+                              >
+                            </v-sortable>
+                          <!-- <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                            <span class="btn__text">Продолжить</span>
+                          </button> -->
+                    </div>
+  
+                </div>
+            </div>
+        </div>
+        <div class="row" v-if="feedbackType === 'contextBlock' && feedbackShow">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-16 col-xs-12">
+                <div class="test__contextBlock">
+                    <picture class="main-people__charset">
+                        <img class="img_center mb-20 mb-xs-25" :src="!isCorrect ? 'user/img/incorrectOS.png' : 'user/img/correctOS.png'" alt="icon"/>
+                    </picture>
+                    <p class="text-m">{{ currentOS }}</p>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25" v-if="attempt">
+                <button class="btn btn-common btn-common_border" v-if="btnReset && !btnNext" @click="resetQuestion()">
+                    <span class="btn__text">Исправить</span>
+                </button>
+                <button class="btn btn-common btn-common_border ml-60" v-if="btnShowCorrect && !btnNext && counterAttempt >= attempt" @click="showCorrectQuestion()">
+                    <span class="btn__text">Узнать ответ</span>
+                </button>
+                <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25" v-else>
+                <button class="btn btn-common btn-common_border" v-if="btnReset && !btnNext" @click="resetQuestion()">
+                    <span class="btn__text">Исправить</span>
+                </button>
+                <button class="btn btn-common btn-common_border ml-60" v-if="btnShowCorrect && !btnNext" @click="showCorrectQuestion()">
+                    <span class="btn__text">Узнать ответ</span>
+                </button>
+                <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+        </div>
+        <div class="row" v-if="feedbackType === 'toNext' && feedbackShow">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-16 col-xs-12">
+                <div class="test__contextBlock">
+                    <picture class="main-people__charset">
+                        <img class="img_center mb-20 mb-xs-25" :src="!isCorrect ? 'user/img/incorrectOS.png' : 'user/img/correctOS.png'" alt="icon"/>
+                    </picture>
+                    <p class="text-m">{{ questionStorage[counterQuestion].answers[tempStorage.items].feedback }}</p>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25">
+  
+                <!-- <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button> -->
+            </div>
+        </div>
+        <div class="row" v-if="feedbackType === 'correctRetry' && feedbackShow">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-16 col-xs-12">
+                <div class="test__contextBlock">
+                    <picture class="main-people__charset">
+                        <img class="img_center mb-20 mb-xs-25" src="user/img/incorrectOS.png" alt="icon"/>
+                    </picture>
+                    <p class="text-m">{{ currentOS }}</p>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25">
+                <button class="btn btn-common btn-common_border" @click="resetQuestion()">
+                    <span class="btn__text">Посмотреть другой ответ</span>
+                </button>
+                <button class="btn btn-common btn-common_border ml-60" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+        </div>
+        <div class="row" v-if="feedbackType === 'dontCorrect' && feedbackShow">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-16 col-xs-12">
+                <div class="test__contextBlock">
+                    <picture class="main-people__charset">
+                      <img class="img_center mb-20 mb-xs-25" :src="!isCorrect ? 'user/img/incorrectOS.png' : 'user/img/correctOS.png'" alt="icon"/>
+                        <!-- <img class="img_center mb-20 mb-xs-25" :src="!btnNext ? 'user/img/correctOS.png' : 'user/img/correctOS.png'" alt="icon"/> -->
+                    </picture>
+                    <p class="text-m" v-html="questionStorage[counterQuestion].answers[tempStorage.items].feedback"></p>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25">
+                <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+        </div>
+        <div class="row animate__animated animate__fadeInLeft" v-if="feedbackType === 'femaleDialog' && feedbackShow">
+            <div class="col-lg-4 col-xs-12 order-xs-2 align-vertical lmm-margin__right-0">
+                <div><img alt="" :src="!isCorrect ? 'user/img/pers_female_3_circle.png' : 'user/img/pers_female_3_circle.png'" width="130">
+                </div>
+            </div>
+            <div class="col-lg-16 col-xs-12 order-xs-1 mb-xs-20 align-center align-vertical">
+                <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                    <div class="text-m">
+                      {{ currentOS }}
+                      <!-- {{ questionStorage[counterQuestion].answers[tempStorage.items].feedback }} -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25">
+                <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+        </div>
+        <div class="row animate__animated animate__fadeInLeft" v-if="feedbackType === 'maleDialog' && feedbackShow">
+            <div class="col-lg-4 col-xs-12 order-xs-2 align-vertical lmm-margin__right-0">
+                <div>
+                    <img alt="" v-if="counterCorrect == 1" src="user/img/pers_male_4_circle.png" width="130">
+                    <img alt="" v-else-if="counterCorrect !== 1" src="user/img/pers_male_4_circle.png" width="130">
+                </div>
+            </div>
+            <div class="col-lg-16 col-xs-12 order-xs-1 mb-xs-20 align-center align-vertical">
+                <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                    <div class="text-m" v-html="questionStorage[counterQuestion].answers[tempStorage.items].feedback">
+                    </div>
+                    <!-- <div class="text-m">{{ questionStorage[counterQuestion].answers[tempStorage.items].feedback }}
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="row" v-if="feedbackType === 'femaleDialogChecked' && feedbackShow">
+            <div class="col-lg-4 col-xs-12 order-xs-2 align-vertical lmm-margin__right-0">
+                <div><img alt="" :src="!isCorrect ? 'user/img/pers_woman_circle_oos.png' : 'user/img/pers_woman_circle_pos.png'" width="130">
+                </div>
+            </div>
+            <div class="col-lg-16 col-xs-12 order-xs-1 mb-xs-20 align-center align-vertical">
+                <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                    <div class="text-m">{{ currentOS }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25 mb-30 mb-xs-25" v-if="attempt">
+                <button class="btn btn-common btn-common_border mr-60" v-if="btnReset && !btnNext" @click="resetQuestion()">
+                    <span class="btn__text">Исправить</span>
+                </button>
+                <button class="btn btn-common btn-common_border" v-if="btnShowCorrect && !btnNext && counterAttempt >= attempt" @click="showCorrectQuestion();">
+                    <span class="btn__text">Узнать ответ</span>
+                </button>
+                <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25 mb-30 mb-xs-25" v-else>
+                <button class="btn btn-common btn-common_border mr-60" v-if="btnReset && !btnNext" @click="resetQuestion()">
+                    <span class="btn__text">Исправить</span>
+                </button>
+                <button class="btn btn-common btn-common_border" v-if="btnShowCorrect && !btnNext" @click="showCorrectQuestion();">
+                    <span class="btn__text">Узнать ответ</span>
+                </button>
+                <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+        </div>
+        <div class="row" v-if="feedbackType === 'maleDialogChecked' && feedbackShow">
+            <div class="col-lg-4 col-xs-12 order-xs-2 align-vertical lmm-margin__right-0">
+                <div>
+                    <img alt="" v-if="counterCorrect !== 1" src="user/img/pers_male_circle_pos.png" width="130">
+                    <img alt="" v-else-if="counterCorrect === 1" src="user/img/pers_male_circle_4.png" width="130">
+                </div>
+            </div>
+            <div class="col-lg-16 col-xs-12 order-xs-1 mb-xs-20 align-center align-vertical">
+                <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                    <div class="text-m" v-if="counterCorrect !== 1">{{ questionStorage[counterQuestion].incorrectOS }}
+                    </div>
+                    <div class="text-m" v-else-if="counterCorrect === 1">{{ questionStorage[counterQuestion].correctOS }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25">
+                <button class="btn btn-common btn-common_border mr-60" v-if="btnReset && !btnNext" @click="resetQuestion()">
+                    <span class="btn__text">Исправить</span>
+                </button>
+                <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+        </div>
+        <div class="test__footer text-center"
+             v-if="tempStorage.items.length !== 0 && !feedbackShow">
+            <button class="btn btn-common btn-common_border" v-if="btnAccept" @click="acceptAnswer()">
+                <span class="btn__text">Принять ответ</span>
+            </button>
+            <button class="btn btn-common btn-common_border" v-if="btnNext" @click="nextQuestion()">
+                <span class="btn__text">Продолжить</span>
+            </button>
+        </div>
+    </div>
+  </script>
+  

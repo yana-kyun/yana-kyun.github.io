@@ -1,0 +1,34 @@
+<script type="text/x-template" id="v-draggable-sides-template">
+    <div>
+        <div v-show="!feedbackShow">
+            <div class="draggable-sides__header">
+                <h4>{{cQuestion + 1}}/{{draggableArray.length}}</h4>
+            </div>
+            <div :class="['draggable-sides__container', {'disable': draggableDisable}]">
+                <div class="draggable-sides__item">{{draggableArray[cQuestion].textLeft}}</div>
+                <div :class="['draggable-sides__text',
+                {'correct': draggableDisable && draggableArray[cQuestion].correct === cPosition},
+                {'incorrect': draggableDisable && draggableArray[cQuestion].correct !== cPosition},]">
+                    {{draggableArray[cQuestion].textDraggable}}
+                </div>
+                <div class="draggable-sides__item">{{draggableArray[cQuestion].textRight}}</div>
+            </div>
+            <div class="draggable-sides__footer">
+                <button class="btn" v-if="btnNext" @click="nextQuestion()">Продолжить</button>
+            </div>
+        </div>
+
+        <div class="test-feedback" v-show="feedbackShow">
+            <div class="test-feedback__header">
+                <h3>Обратная связь</h3>
+            </div>
+            <div class="test-feedback__content">
+                Правильно {{ corrQuestion }} из {{ draggableArray.length }}
+            </div>
+            <div class="test-feedback__footer">
+                <button class="btn" @click="nextSlide()">Продолжить</button>
+                <button class="btn" @click="resetDraggable()">Повторить</button>
+            </div>
+        </div>
+    </div>
+</script>

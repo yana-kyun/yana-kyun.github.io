@@ -1,0 +1,121 @@
+<script type="text/x-template" id="v-header-template">
+    <div :class="['header', {'open': content.show}]">
+        <div class="header__content">
+          <div class="header__content_info">
+            <div class="header__logo pl-15 pr-30 pl-xs-15 pr-xs-25">
+                <img src="user/img/header__logo.svg" alt="header-logo">
+            </div>
+            <div class="header__title">
+            </div>
+            <!-- <button @click="showNav()" :class="['header__btn', {'open': content.show}]">
+                <svg class="icon-svg icon-svg_close">
+                    <use xlink:href="user/svg/sprite.svg#close"/>
+                </svg>
+                <svg class="icon-svg icon-svg_menu">
+                    <use xlink:href="user/svg/sprite.svg#menu"/>
+                </svg>
+            </button> -->
+          </div>
+        </div>
+        <!-- <div class="header__progressbar"> -->
+            <!-- <div class="header__progressbar_info">
+                <div class="header__progressbar_info-line"></div>
+            </div> -->
+        <!-- </div> -->
+        <div class="header__framename">
+            <div class="header__framename_info">
+                <div class="header__framename_info_content js-header-title">Title</div>
+            </div>
+        </div>
+        <!-- <div v-show="content.show" class="header-nav">
+            <div class="header-nav__tabs">
+                <button 
+                @click="selectTab('navigation')" 
+                :class="['header__item', currentTab === 'navigation' ? 'active' : '']">Содержание</button>
+                <button v-if="!glossaryOff"
+                @click="selectTab('glossary')" 
+                :class="['header__item', currentTab === 'glossary' ? 'active' : '']">Глосcарий</button>
+                <button  v-if="!materialOff"
+                @click="selectTab('materials')" 
+                :class="['header__item', currentTab === 'materials' ? 'active' : '']">Материалы</button>
+            </div>
+            <div class="header-nav__content">
+
+                    <navigation v-show="currentTab === 'navigation'" :nav-items="navigation" :content-show="content.show" @updateContentShow="updateContentShow"></navigation>
+                    <glossary v-show="currentTab === 'glossary'" :glossary-words="glossary"></glossary>
+                    <materials v-show="currentTab === 'materials'" :materials="materials"></materials>
+
+            </div>
+        </div> -->
+    </div>
+</script>
+
+
+<script type="text/x-template" id="navigation-template">
+    <div>
+        <div class="navigation js-scroll">
+            <div v-for="(navItem, key) in navItems" :class="['navigation__item', {'active' : navItem.active}, {'current' : key === activeItems}]">
+                <div class="navigation__title" @click="gotoSlide(navItem)">{{navItem.title}}</div>
+                <ol class="navigation__links">
+                    <li :class="['navigation__link', {'disabled': link.disable}, (keyItem === activeItem && key === activeItems) ? 'active' : '']"
+                        v-for="(link, keyItem) in navItem.links" @click="scrollTitle(keyItem, navItem)">
+                        {{link.title}}
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/x-template" id="glossary-template">
+    <div class="header-nav__glossary">
+        <div class="glossary__firstLetter">
+            <div class="glossary__firstLetter_content">
+                <a :class="['glossary__link', {'active': key === activeItem}]" :href="'#word-'+key" v-for="(glossaryItem, key) in glossaryData">{{glossaryItem.title}}</a>
+            </div>
+        </div>
+        <div class="glossary__content js-scroll">
+            <div :id="'word-'+key"  v-for="(glossaryItem, key) in glossaryData" class="glossary__item">
+                <div class="glossary__title">{{glossaryItem.title}}</div>
+                <div class="glossary__words">
+                    <div class="glossary__word" v-for="(word, key) in glossaryItem.data">
+                        <div class="glossary__word_name">{{word.name}}</div>
+                        <div class="glossary__word_description">{{word.description}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- <script type="text/x-template" id="materials-template">
+    <div class="header-nav__materials">
+        <div class="materials__container">
+
+                <div class="materials__container__file-item" v-for="(materialItem, key) in materials">
+                    <div @click="handleMaterial(materialItem)">
+                        <span class="materials__container__file-name">{{materialItem.title}}</span>
+                        <div :class="['materials__container__file-link', materialItem.fileClass]">Скачать</a></div>
+                        <div class="materials__container__file-size">{{materialItem.format}} {{materialItem.size}} </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</script> -->
+<script type="text/x-template" id="materials-template">
+  <div class="header-nav__materials">
+      <div class="materials__container">
+
+              <div class="materials__container__file-item" v-for="(materialItem, key) in materials">
+                  <a :href="materialItem.link" download>
+                      <span class="materials__container__file-name">{{materialItem.title}}</span>
+                      <div :class="['materials__container__file-link', materialItem.fileClass]">Скачать</div>
+                      <div class="materials__container__file-size">{{materialItem.format}} {{materialItem.size}} </div>
+                  </a>
+              </div>
+      </div>
+  </div>
+</script>
+
+

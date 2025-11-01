@@ -1,0 +1,7 @@
+@mixin bg-color($class-name, $arr) {
+  @each $name, $color in $arr {
+    #{$class-name + $name} {
+      background: $color;
+    }
+  }
+}

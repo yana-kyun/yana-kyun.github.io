@@ -1,0 +1,67 @@
+<script type="text/x-template" id="v-simple-test-template">
+    <div class="test__container">
+        <div class="test__body"
+             v-if="keyQuestion === counterQuestion"
+             v-for="(question, keyQuestion) in testArray">
+  
+            <div class="row" v-else>
+                <div class="col-12">
+                    <!--Text вопроса-->
+                    <h4 class="mb-10 mb-xs-10">{{ question.text }}</h4>
+                    <p class="text-s text-gray-light mb-20 mb-xs-25" v-if="!question.supText && testType !=='questionnaire' && question.type !=='sortable'">{{question.type === 'checkbox' ? 'Выбери несколько вариантов' : 'Выбери один ответ'}}</p>
+                    <p class="text-s text-gray-light mb-30 mb-xs-25">{{question.supText}}</p>
+                    <hr class="border-gray mb-30 mb-xs-25" v-if="question.type === 'sortable'"/>
+                </div>
+                <div class="col-12">
+                    <!--Radio ответы-->
+                    <div class="test__answers">
+                        <div class="radio" v-for="(answer, keyAnswer) in question.answers">
+                            <input type="radio"
+                                   @change="isTarget($event, keyAnswer, question.type)"
+                                   :checked="answer.selected"
+                                   :id="'radio'+question.name+''+keyAnswer"
+                                   :value="keyAnswer"
+                                   :disabled="disableInput"
+                                   :name="'radio'+question.name">
+                            <label v-if="tick" :class="['text-m', {'correct_sel' : (answer.selected && answer.correct && isTicked)}, {'correct_show' : (!answer.selected && answer.correct && isTicked)}, {'incorrect_sel' : (answer.selected && !answer.correct && isTicked)}]"
+                                   :for="'radio'+question.name+''+keyAnswer">{{ answer.text }}</label>
+                            <!-- <label v-if="tick" :class="['text-m', {'correct_sel' : (answer.selected && answer.correct && ((btnNext || btnReset)))}, {'correct_show' : (!answer.selected && answer.correct && (btnNext || btnReset))}, {'incorrect_sel' : (answer.selected && !answer.correct && (btnNext || btnReset))}]"
+                                   :for="'radio'+question.name+''+keyAnswer">{{ answer.text }}</label> -->
+                            <label v-else :class="['text-m', {'correct' : (answer.selected && answer.correct && btnNext)}, {'incorrect' : (answer.selected && !answer.correct && btnNext)}]"
+                                   :for="'radio'+question.name+''+keyAnswer">{{ answer.text }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" v-if="feedbackShow">
+            <div class="col-lg-4 col-xs-12 order-xs-2 align-vertical lmm-margin__right-0">
+                <div><img alt="" :src="!isCorrect ? 'user/img/pers_woman_circle_oos.png' : 'user/img/pers_woman_circle_pos.png'" width="130">
+                </div>
+            </div>
+            <div class="col-lg-16 col-xs-12 order-xs-1 mb-xs-20 align-center align-vertical">
+                <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                    <div class="text-m">
+                      <!-- {{ currentOS }} -->
+                      {{ questionStorage[counterQuestion].answers[tempStorage.items].feedback }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-30 mt-xs-25">
+                <button class="btn btn_border" v-if="btnNext" @click="nextQuestion()">
+                    <span class="btn__text">Продолжить</span>
+                </button>
+            </div>
+        </div>
+        <div class="test__footer text-center"
+             v-if="tempStorage.items.length !== 0 && !feedbackShow">
+            <button class="btn btn_border" v-if="btnAccept" @click="acceptAnswer()">
+                <span class="btn__text">Принять ответ</span>
+            </button>
+            <button class="btn btn_border" v-if="btnNext" @click="nextQuestion()">
+                <span class="btn__text">Продолжить</span>
+            </button>
+        </div>
+    </div>
+  </script>
+  

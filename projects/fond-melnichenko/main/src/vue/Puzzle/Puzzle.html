@@ -1,0 +1,35 @@
+<script type="text/x-template" id="v-puzzle-practice-template">
+    <div>
+        <div class="pos-r br-10 overflow-hidden" :style="'min-height: ' + practiceHeight + 'px'">
+            <img :src="date.mainImg" alt="" class="w-100 pos-a" ref="jsPuzzleMain">
+            <div class="" v-for="(item, keyElem) in elemArray">
+                <img :src="item.img" alt="" :class="['w-100 pos-a', {'invisible' : !item.open}]">
+            </div>
+            <div class="row h-100 end">
+                <div class="col-lg-4 h-100" style="z-index: 8;">
+                    <div class="bg-primary w-100 h-100 pl-10 pr-10 d-flex flex-column jc-center js-draggable-container" :style="'min-height: ' + practiceHeight + 'px'">
+                        <img v-for="(item, keyElem) in elemArray" :src="item.elem" alt="" :class="['js-draggable img_center', {'invisible' : item.open, 'mb-40' : keyElem < elemArray.length-1}]" :data-id = "item.id">
+                    </div>
+                </div>
+            </div>
+            <div class="pos-a top left w-100 h-100">
+                <div class="js-droppable-item pos-a" :data-id = "droppable.id"
+                    @click="showModal(droppable.id)"
+                     v-for="(droppable, key) in containerArray" :style="posAbsolute(droppable.pos)">
+                    <div class="js-droppable">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-primary text-white balloon-small pos-a hide" ref="jsModal" v-for="(item, keyElem) in elemArray"  :style="posAbsolute(item.modalPos)">
+                <div class="d-flex ai-start">
+                    <div>
+                        <p class="text-m text-bold mb-10" v-html="item.modalTitle"></p>
+                        <p class="text-s" v-html="item.modalText"></p>
+                    </div>
+                    <img alt="" src="user/img/close.svg" class="pointer ml-5" @click="hideModal(keyElem)">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</script>

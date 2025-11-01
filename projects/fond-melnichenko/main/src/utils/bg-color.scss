@@ -1,0 +1,4 @@
+@import "../style/vars";
+@import "./mixins/_bg-color";
+
+@include bg-color(".bg-", $bg-color);
