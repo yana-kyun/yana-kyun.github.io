@@ -1,0 +1,166 @@
+.playlists {
+  padding: var(--section_pd) 0;
+}
+
+.playlists__title {
+  margin-bottom: 9px;
+}
+
+.playlists__text {
+  font-size: 12px;
+  color: var(--text_gray);
+  line-height: 16px;
+}
+
+.playlists__copyright {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 22px;
+  color: var(--text_gray);
+}
+
+.playlists__18 {
+  margin-bottom: 23px;
+}
+
+.playlists__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 29px;
+}
+
+.playlists__card {
+  position: relative;
+  width: calc(50% - 15px);
+  border: 1px solid var(--light_gray);
+}
+
+.playlists__card-content {
+  padding: 10px 9px;
+}
+
+.playlists__img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+.playlists__country {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 24px;
+  height: 20px;
+}
+
+.playlists__name {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.playlists__description {
+  display: block;
+  font-size: 9px;
+  color: var(--text_gray);
+}
+
+
+@media (min-width: 576px) {
+
+  .playlists__title {
+    margin-bottom: 5px;
+  }
+
+  .playlists__text {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .playlists__copyright {
+    font-size: 16px;
+  }
+
+  .playlists__list {
+    margin-bottom: 15px;
+  }
+
+  .playlists__card {
+    display: flex;
+  }
+
+  .playlists__country {
+    left: 0;
+  }
+
+  .playlists__img {
+    width: 44%;
+    margin-bottom: 0;
+  }
+
+  .playlists__card-content {
+    width: 56%;
+    padding: 38px 8px;
+  }
+
+  .playlists__name {
+    font-size: 16px;
+  }
+
+  .playlists__description {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 992px) {
+  .playlists__card {
+    width: calc(100% * 1 / 3 - 20px);
+  }
+
+  .playlists__list {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .playlists__container {
+    display: flex;
+    gap: 30px;
+  }
+
+  .playlists__left {
+    max-width: 350px;
+    width: 100%;
+  }
+
+  .playlists__right {
+    max-width: calc(100% - (350px + 30px));
+  }
+
+  .playlists__list {
+    margin-top: 17px;
+  }
+
+  .playlists__card {
+    width: calc((100% - 3*30px) / 4);
+    flex-direction: column;
+  }
+
+  .playlists__img {
+    width: 100%;
+  }
+
+  .playlists__country {
+    right: 0;
+    left: auto;
+  }
+
+  .playlists__card-content {
+    width: 100%;
+    padding: 14px 15px;
+  }
+}

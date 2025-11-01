@@ -1,0 +1,81 @@
+.hero {
+  padding: 39px 0;
+}
+
+.hero__container {
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+.hero__title {
+  font-size: 32px;
+  margin-bottom: 2px;
+}
+
+.hero__title-name {
+  font-style: italic;
+  font-weight: normal;
+}
+
+.hero__text {
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 150%;
+}
+
+@media (min-width: 576px) {
+  .hero {
+    padding-top: 90px;
+    padding-bottom: 85px;
+  }
+
+  .hero__title {
+    font-size: 60px;
+    margin-bottom: 7px;
+  }
+
+  .hero__text {
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 150%;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero {
+    padding-top: 80px;
+    padding-bottom: 74px;
+  }
+
+  .hero__content {
+    padding: 14px 0;
+    padding-right: 33%;
+    background-image: url(../images/microphone1024.png);
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  .hero__title {
+    margin-bottom: 9px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    padding-top: 13px;
+    padding-bottom: 28px;
+  }
+
+  .hero__content {
+    padding-top: 74px;
+    padding-bottom: 63px;
+    padding-right: 42%;
+    background-image: url(../images/microphone.jpg);
+
+  }
+
+  .hero__text {
+    margin-bottom: 45px;
+  }
+}

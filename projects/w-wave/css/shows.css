@@ -1,0 +1,244 @@
+.shows {
+  padding: var(--section_pd) 0;
+}
+
+.shows__title {
+  margin-bottom: 26px;
+}
+
+.shows__left-bottom {
+  display: none;
+}
+
+.shows__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.shows__item {
+  width: calc(50% - 15px);
+  min-height: 149px;
+}
+
+.shows__card {
+  position: relative;
+  height: 100%;
+  border: 1px solid var(--light_gray);
+}
+
+.shows__card-img {
+  display: block;
+  width: 100%;
+}
+
+.shows__card-content {
+  padding: 10px 10px 38px 10px;
+}
+
+.shows__name {
+  margin-bottom: 3px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.shows__schedule {
+  font-size: 9px;
+  color: var(--text_gray);
+}
+
+.shows__link {
+  position: absolute;
+  bottom: 9px;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--black);
+  transition: color var(--mode), background-color var(--mode);
+}
+
+.shows__link:hover:not(:active) {
+  color: var(--primary);
+}
+
+.shows__link:focus-visible:not(:active) {
+  color: var(--white);
+  background-color: var(--primary_light);
+  border: 1px solid var(--primary_light);
+  outline: none;
+}
+
+.shows__link:active {
+  color: var(--primary_shade);
+  outline: none;
+}
+
+.shows__archive {
+  padding: 30px 54px 0 10px;
+  border-top: 1px solid var(--light_gray);
+}
+
+.shows__archive-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 105px;
+  padding-left: 90px;
+  background-image: url(../images/mic.png);
+  background-repeat: no-repeat;
+}
+
+.shows__archive-text {
+  margin-bottom: 7px;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--text_gray);
+}
+
+.shows__archive-btn {
+  align-self: flex-start;
+  padding: 7px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid var(--black);
+  color: var(--black);
+  border-radius: 77px;
+  transition: color var(--mode), background-color var(--mode);
+}
+
+.shows__archive-btn:hover:not(:active) {
+  background-color: var(--light_black);
+  color: var(--white);
+}
+
+.shows__archive-btn:focus-visible:not(:active) {
+  background-color: var(--light_black);
+  color: var(--white);
+  outline: 2px solid var(--light_black);
+}
+
+.shows__archive-btn:active {
+  background-color: var(--black);
+  color: var(--white);
+  outline: none;
+}
+
+@media (any-hover: hover) {
+  .shows__link:hover:not(:active) {
+    color: var(--primary);
+  }
+
+  .shows__archive-btn:hover:not(:active) {
+    background-color: var(--light_black);
+    color: var(--white);
+  }
+}
+
+@media (min-width: 576px) {
+  .shows {
+    padding-bottom: 0;
+  }
+
+  .shows__title {
+    margin-bottom: 114px;
+  }
+
+  .shows__list {
+    margin-bottom: 60px;
+  }
+
+  .shows__card-content {
+    padding: 20px 16px;
+  }
+
+  .shows__name {
+    font-size: 20px;
+  }
+
+  .shows__schedule {
+    margin-bottom: 32px;
+    font-size: 12px;
+  }
+
+  .shows__link {
+    bottom: 18px;
+    font-size: 16px;
+  }
+
+  .shows__archive {
+    justify-content: center;
+    padding: 30px 210px;
+  }
+
+  .shows__archive-content {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    background-image: url(../images/mic_768.png);
+  }
+
+  .shows__archive-btn {
+    margin-bottom: 8px;
+    padding: 10px 54px;
+  }
+
+  .shows__archive-text {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+
+  .shows__bottom {
+    padding-bottom: 21px;
+  }
+}
+
+@media (min-width: 992px) {
+  .shows {
+    padding-bottom: var(--section_pd);
+  }
+
+  .shows__bottom {
+    display: none;
+  }
+
+  .shows__container {
+    display: flex;
+    gap: 30px;
+  }
+
+  .shows__left {
+    position: relative;
+    flex-shrink: 0;
+    width: calc(33.33% - 20px);
+  }
+
+  .shows__left-bottom {
+    position: absolute;
+    display: block;
+    bottom: 5px;
+  }
+
+  .shows__archive {
+    padding: 0;
+    border-top: none;
+  }
+
+  .shows__archive-content {
+    padding-left: 0;
+    padding-top: 114px;
+    background-size: 65px 89px;
+  }
+
+  .shows__list {
+    margin-top: 13px;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shows__left {
+    width: calc(25% - 22.5px);
+  }
+
+  .shows__item {
+    width: calc((100% - 60px) / 3);
+  }
+}

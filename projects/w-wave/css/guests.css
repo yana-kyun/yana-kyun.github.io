@@ -1,0 +1,141 @@
+.guests {
+  padding-top: var(--section_pd);
+  padding-bottom: var(--section_pd);
+  background-color: var(--black);
+}
+
+.guests__title {
+  margin-bottom: 9px;
+  color: var(--white);
+}
+
+.guests__subtitle {
+  color: var(--text_gray);
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.guests__text {
+  margin-bottom: 25px;
+  color: var(--text_gray);
+  font-size: 14px;
+  line-height: 160%;
+}
+
+.guests__card:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.guests__card-img {
+  display: block;
+  width: 100%;
+  margin-bottom: 13px;
+}
+
+.guests__name {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.guests__description {
+  margin-bottom: 30px;
+  color: var(--text_gray);
+  line-height: 180%;
+}
+
+
+@media (min-width: 576px) {
+  .guests__subtitle {
+    margin-bottom: 6px;
+    font-size: 20px;
+  }
+
+  .guests__text {
+    margin-bottom: 48px;
+    font-size: 20px;
+  }
+
+  .guests__card-img {
+    margin-bottom: 31px;
+  }
+
+  .guests__name {
+    margin-bottom: 7px;
+  }
+
+  .guests__description {
+    margin-bottom: 30px;
+    max-width: 362px;
+    width: 100%;
+  }
+
+  .guests__card:not(:last-child) {
+    margin-bottom: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .guests__title {
+    margin-bottom: 6px;
+  }
+
+  .guests__text {
+    margin-bottom: 49px;
+    width: 66%;
+  }
+
+  .guests__card-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .guests__picture {
+    display: block;
+  }
+
+  .guests__card-img {
+    margin-bottom: 0;
+  }
+
+  .guests__card-content {
+    position: relative;
+    width: calc(50% + 40px);
+  }
+
+  .guests__btn {
+    position: absolute;
+    bottom: 2px;
+  }
+
+  .guests__card:not(:last-child) {
+    margin-bottom: 50px;
+  }
+
+  .guests__description {
+    max-width: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .guests__text {
+    width: 75%;
+  }
+
+  .guests__card {
+    width: 83%;
+  }
+
+  .guests__card-content {
+    width: 62%;
+  }
+
+  .guests__card:not(:last-child) {
+    margin-bottom: 49px;
+  }
+}

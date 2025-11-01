@@ -1,0 +1,299 @@
+.about {
+  padding: var(--section_pd) 0;
+  background-color: var(--black);
+}
+
+.about__title {
+  margin-bottom: 10px;
+  line-height: 100%;
+  color: var(--white);
+}
+
+.about__slogan {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 150%;
+  color: var(--text_gray);
+}
+
+.about__text {
+  margin-bottom: 28px;
+  font-size: 14px;
+  line-height: 159%;
+  color: var(--text_gray);
+}
+
+.about__list {
+  display: flex;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.about__card {
+  width: calc(50% - 15px);
+}
+
+.about__img {
+  display: block;
+  width: 100%;
+  margin-bottom: 13px;
+}
+
+.about__card-name {
+  margin-bottom: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--white);
+}
+
+.about__card-descr {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text_gray);
+}
+
+.about__form-comment,
+.about__form-name,
+.about__form-email {
+  width: 100%;
+  padding: 15px 24px;
+  color: var(--white);
+  background-color: inherit;
+  border: 1px solid var(--white);
+  outline: none;
+  border-radius: 40px;
+  transition: background-color var(--mode), border-color var(--mode);
+}
+
+.about__form-comment:hover:not(:active),
+.about__form-name:hover:not(:active),
+.about__form-email:hover:not(:active) {
+  background-color: var(--light_black);
+}
+
+.about__form-comment:focus-visible:not(:active),
+.about__form-name:focus-visible:not(:active),
+.about__form-email:focus-visible:not(:active) {
+  background-color: var(--light_black);
+  border-color: var(--primary_light);
+}
+
+.about__form-comment:active,
+.about__form-name:active,
+.about__form-email:active {
+  background-color: var(--black);
+  border-color: var(--white);
+}
+
+.error_input {
+  border-color: var(--red);
+}
+
+.about__form-comment::placeholder,
+.about__form-name::placeholder,
+.about__form-email::placeholder {
+  color: var(--text_gray);
+}
+
+.about__form-comment {
+  margin-bottom: 24px;
+  min-height: 150px;
+  resize: none;
+  border-radius: 20px;
+}
+
+.about__form-inputs {
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.about__form-name {
+  margin-bottom: 29px;
+}
+
+.about__btn {
+  margin-bottom: 20px;
+}
+
+.about__form-suggest {
+  display: flex;
+  align-items: center;
+}
+
+.about__checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom-checkbox {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background-color: transparent;
+  border: 1px solid var(--white);
+}
+
+.about__checkbox-text {
+  position: relative;
+  width: 100%;
+  padding-left: 21px;
+  font-size: 9px;
+  line-height: 100%;
+  font-weight: 500;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.about__checkbox:checked + .custom-checkbox {
+  background-image: url(../images/check.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0.7em;
+}
+
+.about__checkbox:focus-visible:not(:active) + .custom-checkbox {
+  box-shadow: 0 0 2px 2px var(--primary_light);
+}
+
+@media (any-hover: hover) {
+
+  .about__form-comment:hover:not(:active),
+  .about__form-name:hover:not(:active),
+  .about__form-email:hover:not(:active) {
+    background-color: var(--light_black);
+  }
+}
+
+@media (min-width: 576px) {
+  .about {
+    background-image: url("../images/about/figures.svg");
+    background-repeat: no-repeat;
+    background-position: 0 475px;
+  }
+
+  .about__title {
+    margin-bottom: 12px;
+  }
+
+  .about__slogan {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .about__text {
+    margin-bottom: 172px;
+    font-size: 20px;
+  }
+
+  .about__img {
+    margin-bottom: 31px;
+  }
+
+  .about__card-name {
+    margin-bottom: 9px;
+    font-size: 20px;
+  }
+
+  .about__card-descr {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .about__form-name,
+  .about__form-email {
+    padding: 25px 32px;
+  }
+
+  .about__form-comment::placeholder,
+  .about__form-name::placeholder,
+  .about__form-email::placeholder {
+    font-size: 20px;
+  }
+
+  .about__form-comment {
+    margin-bottom: 25px;
+    padding: 30px;
+    border-radius: 30px;
+  }
+
+  .about__form-inputs {
+    margin-bottom: 28px;
+  }
+
+  .about__btn {
+    margin-bottom: 30px;
+  }
+
+  .about__checkbox-text {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 992px) {
+  .about {
+    background-image: none;
+  }
+
+  .about__img {
+    margin-bottom: 31px;
+    height: 255px;
+  }
+
+  .about__inf {
+    padding-right: 285px;
+    background-image: url("../images/about/star.svg");
+    background-repeat: no-repeat;
+    background-position: right center;
+  }
+
+  .about__text {
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
+  .about__form-comment {
+    padding-left: 30px;
+  }
+
+  .about__form-name,
+  .about__form-email {
+    margin-bottom: 0;
+    width: calc(50% - 15px);
+    padding: 24px 30px;
+  }
+
+  .about__form-inputs {
+    flex-wrap: nowrap;
+    margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .about__inf {
+    padding-right: 476px;
+    background-image: url("../images/about/star_spiral.svg");
+  }
+
+  .about__title {
+    margin-bottom: 13px;
+  }
+
+  .about__list {
+    flex-wrap: nowrap;
+  }
+
+  .about__form-wrap {
+    width: calc(10 / 12 * 100% - 5px);
+  }
+
+  .about__form-inputs {
+    margin-bottom: 30px;
+  }
+}
