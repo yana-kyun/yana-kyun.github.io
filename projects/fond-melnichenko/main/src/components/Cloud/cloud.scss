@@ -1,0 +1,53 @@
+.cloud {
+    &-group {
+        position: relative;
+
+        & .cloud {
+            position: relative;
+            cursor: pointer;
+
+            &__state {
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: opacity 0.3s;
+
+                &_default {
+                    opacity: 1;
+                }
+
+                &_selected {
+                    opacity: 0;
+                }
+
+                &_hover {
+                    opacity: 0;
+                    
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &_selected {
+                & .cloud {
+                    &__state {
+                        &_default {
+                            opacity: 0;
+                        }
+        
+                        &_selected {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        &_done {
+            & .cloud {
+                cursor: default;
+            }
+        }
+    }
+}

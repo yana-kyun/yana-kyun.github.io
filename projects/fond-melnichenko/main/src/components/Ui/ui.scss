@@ -1,0 +1,64 @@
+.ui {
+	&__animation {
+		z-index: -1;
+		position: absolute;
+
+		
+	}
+	&__line {
+		position: relative;
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 1px;
+			background-color: black;
+			width: 100%;
+		}
+		&_left {
+			&::after {
+				content: "";
+				position: absolute;
+				width: 33.3333%;
+				height: 4px;
+				bottom: 0;
+				background-color: #7f22db;
+			}
+		}
+		&_center {
+			&::after {
+				content: "";
+				position: absolute;
+				width: 33.3333%;
+				height: 4px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				background-color: #7f22db;
+			}
+		}
+		&_right {
+			&::after {
+				content: "";
+				position: absolute;
+				width: 33.3333%;
+				height: 4px;
+				bottom: 0;
+				right: 0;
+				background-color: #7f22db;
+			}
+		}
+	}
+	&__map {
+		&_1 {
+			width: 952px;
+			height: 782px;
+			@media #{$breakpoint-xs-only} {
+				width: 338px;
+				height: 368px;
+			}
+		}
+	}
+}

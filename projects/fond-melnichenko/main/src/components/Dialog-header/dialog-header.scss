@@ -1,0 +1,58 @@
+@import "../../style/_vars";
+@import "../../utils/variables/_variables";
+
+.dialog-header {
+    &-container {
+        position: fixed;
+        top: 46px;
+        // max-width: 1280px;
+        // padding: 0 70px;
+        width: 100% !important;
+        // margin: 0 auto;
+        border-bottom: 1px solid $white;
+
+        @media #{$breakpoint-xs-only} {
+            // max-width: 375px;
+            // padding: 0 10px;
+            width: 100% !important;
+        }
+    }
+
+    &-content {
+        max-width: 1280px;
+        padding: 20px 70px;
+        margin: 0 auto;
+        
+        @media #{$breakpoint-xs-only} {
+            max-width: 375px;
+            padding: 10px 10px;
+            margin: 0 auto;
+        }
+    }
+
+    &-img {
+        width: 80px;
+        @media #{$breakpoint-xs-only} {
+            width: 43px;
+        }
+
+        &_status {
+            width: 48px;
+            @media #{$breakpoint-xs-only} {
+                height: 18px;
+                width: 37px;
+            }
+
+            img {
+                @media #{$breakpoint-xs-only} {
+                    width: fit-content;
+                    height: fit-content;
+                    object-fit: fill;
+                }
+                
+            }
+        }
+
+
+    }
+}

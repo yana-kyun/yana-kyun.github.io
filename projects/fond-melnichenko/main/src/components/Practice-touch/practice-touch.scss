@@ -1,0 +1,123 @@
+@import "../../style/_vars";
+
+.touch-practice-block {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    @media (max-width:719px) {
+        text-align: start;
+    }
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.main-image {
+    width: 100%;
+    display: block;
+}
+
+.clickable-area {
+    position: absolute;
+    border: 1px solid $grey-practice;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 1;
+
+    &.selected {
+        border: 3px solid $primary;
+    }
+
+    &.selected.correct {
+        border-color: $green-2 !important;
+    }
+
+    &.selected.incorrect {
+        border-color: $red-2 !important;
+    }
+
+    &.disabled {
+        pointer-events: none;  /* Отключает клики */
+        cursor: not-allowed;   /* Меняет курсор */
+    }
+
+    
+
+    &-find {
+        border-radius: 50%;
+        border: none;
+
+        &.selected {
+            border: 3px solid $primary;
+        }
+
+        &.selected.correct {
+            border-color: $green-2 !important;
+        }
+
+        &.selected.incorrect {
+            border-color: $red-2 !important;
+        }
+
+        &.square-border {
+            border-radius: 8px;
+        }
+    }
+}
+
+.clickable-area {
+    &-yellow {
+        .clickable-area {
+            border-color:#F7F317;
+            &.selected {
+                border-color: $primary;
+            }
+        }
+    }
+    &-light-grey {
+        .clickable-area {
+            border-color:$light-gray-2;
+            &.selected {
+                border-color: $primary;
+            }
+        }
+    }
+}
+
+.clickable-area-2px {
+    .clickable-area {
+        border-width: 2px;
+        &.selected {
+            border-width: 2px;
+        }
+    }
+}
+
+.clickable-area-3px {
+    .clickable-area {
+        border-width: 3px;
+        &.selected {
+            border-width: 3px;
+        }
+    }
+}
+
+.feedback {
+    margin-top: 15px;
+}
+    
+
+.explanation {
+    padding: 30px;
+    background-color: $primary;
+    border-radius: 10px;
+    @media (max-width:719px) {
+        padding: 30px 25px;
+    }
+}
+
+.hidden {
+    display: none;
+}

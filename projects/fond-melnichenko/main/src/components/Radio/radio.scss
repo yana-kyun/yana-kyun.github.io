@@ -1,0 +1,122 @@
+@import "../../style/_vars";
+
+.radio {
+    &.radio-inline {
+        display: inline-block;
+    }
+
+    input[type="radio"] {
+        display: none;
+
+        &:checked {
+            +label:before {
+                border-color: rgba(#004F50, 1);
+                background-color: #004F50;
+                animation: ripple 0.2s linear forwards;
+            }
+
+            +label.correct_sel:before,
+            +label.correct_show:before,
+            +label.incorrect_sel:before {
+                background-color: rgba($white, 1);
+            }
+
+            +label:after {
+                transform: scale(1);
+            }
+        }
+
+        &+label.correct:before {
+            border-color: rgba(#004F50, 1);
+            background-color: #004F50;
+            // border-color: rgba($white, 1);
+            // background-color: rgba($white, 1);
+            animation: ripple 0.2s linear forwards;
+        }
+    }
+
+    label {
+        display: inline-block;
+        min-height: 25px;
+        position: relative;
+        padding: 0 0 0 48px;
+        margin-bottom: 0;
+        cursor: pointer;
+        vertical-align: bottom;
+
+        @media #{$breakpoint-xs-only} {
+            padding: 0 0 0 42px;
+        }
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            transition: all .3s ease;
+            transition-property: transform, border-color;
+        }
+
+
+
+        &.correct_sel:after {
+            content: url('../../user/img/correct_sel.png') !important;
+            top: 0;
+            left: 0;
+            border: none;
+        }
+
+        &.correct_sel:before,
+        &.incorrect_sel:before {
+            border: none;
+        }
+
+        &.incorrect_sel:after {
+            content: url('../../user/img/incorrect.png') !important;
+            top: 0;
+            left: 0;
+            border: none;
+        }
+
+        &.correct_show:before {
+        // &.correct:before {
+            content: url('../../user/img/correct.png') !important;
+            border: none;
+        }
+
+        &.correct_show:after {
+          background: none;
+        }
+
+        &:before {
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            border: 2px solid rgba(#004F50, 1);
+        }
+
+        &:after {
+            top: 6px;
+            left: 6px;
+            width: 13px;
+            height: 13px;
+            transform: scale(0);
+            background: rgba(#FFFFFF, 1);
+        }
+    }
+}
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 1px rgba($black, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba($black, 0.10);
+    }
+
+    100% {
+        box-shadow: 0 0 0 15px rgba($black, 0);
+    }
+}

@@ -1,0 +1,15 @@
+@import "../../style/_vars";
+
+.title {
+  &__img {
+    border-bottom: 1px px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
+    margin-bottom: 60px;
+
+      @media (max-width: 719px) {
+        padding-bottom: 15px;
+        margin-bottom: 45px;
+      }
+  }
+
+}

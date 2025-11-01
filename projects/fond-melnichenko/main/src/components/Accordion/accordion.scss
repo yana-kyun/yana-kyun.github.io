@@ -1,0 +1,28 @@
+@import "../../style/_vars";
+
+.accordion {
+  &__item {
+
+  }
+  &__title {
+    background-color: $blue;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba($gray-3, 1);
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba($blue, 0.85);
+      }
+    }
+  }
+  &__container {
+    display: none;
+    overflow: hidden;
+  }
+  &__content {
+    padding: 10px 20px;
+  }
+}

@@ -1,0 +1,60 @@
+@import "../../style/vars";
+
+.splash {
+    &-img {
+        position: relative;
+        &-vortex {
+            position: absolute;
+            @media #{$breakpoint-lg-only} {
+                bottom: -365px;
+                right: -210px;
+                width: 1220px;
+            }
+            @media #{$breakpoint-xs-only} {
+                bottom: -90px;
+                right: -110px;
+                width: 600px;
+            }
+            
+        }
+        &-pers {
+            position: absolute;
+            bottom: 0;
+            @media #{$breakpoint-lg-only} {
+                right: 50px;
+                width: 560px;
+            }
+            @media #{$breakpoint-xs-only} {
+                width: 254px;
+                right: 55px;
+            }
+        }
+    }
+    &_btn-start-position {
+        @media #{$breakpoint-lg-only} {
+            height: 84%;
+        }
+        @media #{$breakpoint-xs-only} {
+            height: 90%;
+        }
+    }
+    &_btn-xs-center {
+        @media #{$breakpoint-xs-only} {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+.primary-item {
+    position: relative;
+    z-index: 10;
+}
+
+.img-full-size {
+    @media #{$breakpoint-xs-only} {
+        max-width: max-content;
+    }
+}
+
+

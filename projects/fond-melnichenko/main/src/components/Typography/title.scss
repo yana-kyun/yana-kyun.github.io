@@ -1,0 +1,146 @@
+@import "../../style/_vars";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+b,
+strong {
+    font-family: $Bold !important;
+    font-weight: unset !important;
+}
+
+h1,
+.h1 {
+    font-size: 60px;
+    line-height: 70px!important;
+
+    @media (max-width: 719px) {
+        font-size: 48px;
+        line-height: 62px!important;
+    }
+}
+.h1-splash {
+    font-size: 60px;
+    line-height: 70px!important;
+    font-family: $Bold !important;
+
+    @media (max-width: 719px) {
+        font-size: 44px;
+        line-height: 57px!important;
+    }
+    &_38-22 {
+        font-size: 38px;
+        line-height: 50px!important;
+        font-family: $Bold !important;
+
+        @media (max-width: 719px) {
+            font-size: 22px;
+            line-height: 30px!important;
+        }  
+    }
+}
+
+h1.h1-sub {
+    font-size: 56px;
+    line-height: 100% !important;
+    font-family: $Bold !important;
+
+    @media (max-width: 719px) {
+        font-size: 56px;
+        line-height: 100% !important;
+    }
+}
+
+h2,
+.h2 {
+    font-size: 32px;
+    line-height: 50px!important;
+
+    @media (max-width: 719px) {
+        font-size: 30px;
+        line-height: 40px!important;
+    }
+}
+
+.h2-splash {
+    font-size: 38px;
+    line-height: 50px!important;
+
+    @media (max-width: 719px) {
+        font-size: 30px;
+        line-height: 40px!important;
+    }
+}
+
+h3.h3-splash,
+.h3-splash {
+    font-size: 30px;
+    line-height: 40px!important;
+
+    @media (max-width: 719px) {
+        font-size: 22px;
+        line-height: 30px!important;
+    }
+}
+
+h3,
+.h3 {
+    font-size: 22px;
+    line-height: 30px!important;
+
+    @media (max-width: 719px) {
+        font-size: 16px;
+        line-height: 24px!important;
+    }
+}
+
+h4,
+.h4 {
+    font-size: 18px;
+    line-height: 26px!important;
+
+    @media (max-width: 719px) {
+        font-size: 16px;
+        line-height: 20px!important;
+    }
+}
+
+h5,
+.h5 {
+    font-size: 16px;
+    line-height: 24px!important;
+
+    @media (max-width: 719px) {
+
+        font-size: 14px;
+        line-height: 20px!important;
+    }
+}
+
+h6,
+.h6 {
+    font-size: $fs14;
+    line-height: $lh20;
+
+    @media (max-width: 719px) {
+
+        font-size: $fs12;
+        line-height: $lh16;
+    }
+}
+
+.h7 {
+    font-size: $fs12;
+    line-height: $lh16;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

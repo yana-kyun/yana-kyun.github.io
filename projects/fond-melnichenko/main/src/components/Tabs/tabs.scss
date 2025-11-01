@@ -1,0 +1,131 @@
+@import "../../style/_vars";
+
+.tab {
+  &__item {
+    display: none;
+
+    &:first-child {
+      display: block;
+    }
+  }
+
+  &__nav {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__btn {
+    cursor: pointer;
+    display: block;
+    list-style: none;
+    transition: .15s;
+    padding: 5px 20px;
+    background-color: rgba($blue, 1);
+    border-right: 1px solid rgba($white, 1);
+    color: rgba($white, 1);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba($blue, 0.50);
+      }
+    }
+
+    &.active {
+      background-color: rgba($blue, 0.50);
+    }
+  }
+
+  &__items {
+    border: 1px solid rgba($blue, 1);
+    padding: 20px;
+  }
+
+  &_vertical {
+    .tab__nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+
+      & > .tab__btn {
+        border-radius: 4px;
+        border: 1px solid rgba(29, 29, 27, .07);
+        background: #fff;
+        padding: 8px;
+        color: #004f50;
+        fill: transparent;
+        stroke: #004f50;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        line-height: 0;
+
+        @media (hover: hover) {
+          &:hover {
+            background: #004f50;
+            color: #fff;
+            fill: transparent;
+            stroke: #fff;
+          }
+        }
+
+        &.vis {
+          background: #fff;
+          color: #fff;
+          fill: transparent;
+          stroke: #99b9b9;
+        }
+
+        &.active {
+          background: #004f50;
+          color: #fff;
+          fill: transparent;
+          stroke: #fff;
+        }
+      }
+    }
+
+    .tab__items {
+      border: 0;
+      border-top: 1px solid #F8F4EE;
+      padding: 30px 0 0 0;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      height: 38px;
+      width: 229px;
+      display: block;
+      left: 65px;
+      right: auto;
+      top: -40px;
+      bottom: auto;
+      transition: background .6s;
+      background-image: url(../svg/sprite.svg#tab-vertical-help);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+
+      @media #{$breakpoint-xs-only} {
+        left: 7px;
+      }
+    }
+
+    &.vis {
+      &:before {
+        content: none;
+      }
+    }
+  }
+
+  &_horizontal {
+    display: flex;
+
+    .tab__nav {
+      width: 200px;
+    }
+
+    .tab__items {
+      width: 100%;
+    }
+  }
+}

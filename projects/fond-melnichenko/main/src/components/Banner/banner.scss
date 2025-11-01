@@ -1,0 +1,153 @@
+.banner {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 0;
+
+  &-green-gradient {
+    background-image: url(../img/bg-splash.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @media #{$breakpoint-xs-only} {
+      background-image: url(../img/bg-splash_xs.png);
+    }
+  }
+
+  &-splash {
+    &__img {
+      &-top {
+        & img {
+          position: fixed;
+          z-index: -1;
+          // float: right;
+          top: 0;
+          right: 0;
+
+          @media (max-width: 719px) {
+            top: unset;
+            bottom: 0;
+          }
+        }
+      }
+      &-bottom {
+        img {
+          position: fixed;
+          z-index: -1;
+          // float: right;
+          bottom: 0;
+          right: -15px;
+        }
+      }
+      // @media #{$breakpoint-xs-only} {
+      //   &-top {
+      //     z-index: -1;
+      //     position: absolute;
+      //     top: 0;
+      //     right: 0;
+      //   }
+      //   &-bottom {
+      //     width: 100%;
+      //     z-index: -1;
+      //     position: absolute;
+      //     bottom: 0;
+      //     right: 0;          
+      //   }
+      // }
+    }
+  }
+
+  &-purple {
+    &__container {
+      background: linear-gradient(102.53deg, #5042EF -12.99%, #B85FFF 90.07%);
+    }
+
+    &__content {
+      padding: 25px 25px 25px 25px;
+      background-image: url("../img/bg-banner.png");
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+    &-about {
+    background-color: rgba($white, 1);
+
+
+    &__img-top {
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+
+    &__icon-close {
+    cursor: pointer;
+      & svg {
+        width: 28px;
+        height: 28px;
+        opacity: .7;
+      }
+    } 
+  }
+}
+
+.container.splash {
+  height: 100dvh !important;
+  max-width: unset;
+}
+
+.main-people {
+  position: relative;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+
+  &__charset {
+    height: 450px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    background-position-x: right;
+    background-size: contain;
+
+    @media (max-width: 719px) {
+      height: 270px;
+      background-size: contain;
+    }
+
+    &_women {
+      background: url(../img/pers_1-women.png) right bottom no-repeat;
+
+      @media (max-width: 719px) {
+        background: url(../img/pers_1_mobile-women.png) center bottom no-repeat;
+      }
+    }
+    &_male {
+      background: url(../img/pers_1-male.png) right bottom no-repeat;
+
+      @media (max-width: 719px) {
+        background: url(../img/pers_1_mobile-male.png) center bottom no-repeat;
+      }
+    }
+  }
+}
+
+.splash-products {
+  border-bottom: 1px solid rgba($black, .2);
+
+  &__img {
+    position: relative;
+    top: 1px;
+    z-index: 1;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+  

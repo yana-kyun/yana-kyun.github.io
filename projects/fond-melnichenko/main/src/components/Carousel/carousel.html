@@ -1,0 +1,265 @@
+<div class="row mb-20 mb-xs-20">
+    <div class="col-lg-12 col-xs-12">
+        <h1 class="h1 animate__animated animate__backInLeft">new Карусель JS</h1>
+    </div>
+</div>
+<div class="container container_albums">
+    <h1 class="text-white mb-rem-0-75">
+        Тебя ждет множество альбомов под разное настроение.
+    </h1>
+    <hr class="hr hr_white-16 mb-rem-5-0">
+    <!-- Slider main container -->
+    <div class="album-slider js-album-slider">
+        <div class="album-slider__header mb-rem-5-0">
+            <p class="text text-xl text-white w-100">Альбомы</p>
+            <!-- If we need navigation buttons -->
+            <button class="slider__btn-prev ml-rem-0-50 pl-0 pr-0">
+                <svg>
+                    <use xlink:href="user/svg/sprite.svg#slider-btn"/>
+                </svg>
+            </button>
+            <button class="slider__btn-next ml-rem-0-50 pl-0 pr-0">
+                <svg>
+                    <use xlink:href="user/svg/sprite.svg#slider-btn"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <img class="album-slider__slide-num" src="user/img/albums/album-num-1.png" alt="">
+                <div class="album-slider__slide-content">
+                    <img class="mb-rem-0-50" src="user/img/albums/cover-1.png" alt="">
+                    <h6 class="text-white mb-rem-0-50">
+                        Хиты
+                    </h6>
+                    <p class="text text-xs text-white">
+                        Ожидания от тебя в новой роли
+                    </p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="album-slider__slide-num" src="user/img/albums/album-num-2.png" alt="">
+                <div class="album-slider__slide-content">
+                    <img class="mb-rem-0-50" src="user/img/albums/cover-2.png" alt="">
+                    <h6 class="text-white mb-rem-0-50">
+                        Relax
+                    </h6>
+                    <p class="text text-xs text-white">
+                        Оперативное управление — магия баланса
+                    </p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="album-slider__slide-num" src="user/img/albums/album-num-3.png" alt="">
+                <div class="album-slider__slide-content">
+                    <img class="mb-rem-0-50" src="user/img/albums/cover-3.png" alt="">
+                    <h6 class="text-white mb-rem-0-50">
+                        Jazz
+                    </h6>
+                    <p class="text text-xs text-white">
+                        Сотрудничество и коммуникация
+                    </p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="album-slider__slide-num" src="user/img/albums/album-num-4.png" alt="">
+                <div class="album-slider__slide-content">
+                    <img class="mb-rem-0-50" src="user/img/albums/cover-4.png" alt="">
+                    <h6 class="text-white mb-rem-0-50">
+                        Hip-Hop
+                    </h6>
+                    <p class="text text-xs text-white">
+                        Повышение личной и командной коммуникации
+                    </p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="album-slider__slide-num" src="user/img/albums/album-num-5.png" alt="">
+                <div class="album-slider__slide-content">
+                    <img class="mb-rem-0-50" src="user/img/albums/cover-4.png" alt="">
+                    <h6 class="text-white mb-rem-0-50">
+                        Лаунж
+                    </h6>
+                    <p class="text text-xs text-white">
+                        Цикл работы с сотрудником
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="container container_with-bg">
+        <h1 class="mb-rem-3-0">
+            Настрой свой Плейлист
+        </h1>
+        <!-- Slider main container -->
+        <div class="playlist-slider js-playlist-slider">
+            <div class="playlist-slider__header mt-rem-5-0">
+                <!-- If we need navigation buttons -->
+                <button class="slider__btn-prev ml-rem-0-50 pl-0 pr-0">
+                    <svg>
+                        <use xlink:href="user/svg/sprite.svg#slider-btn"/>
+                    </svg>
+                </button>
+                <button class="slider__btn-next ml-rem-0-50 pl-0 pr-0">
+                    <svg>
+                        <use xlink:href="user/svg/sprite.svg#slider-btn"/>
+                    </svg>
+                </button>
+                <!-- If we need pagination -->
+                <div class="slider__pagination ml-rem-1-50"></div>
+            </div>
+
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class="playlist-slider__slide-content">
+                        <div class="row h-100">
+                            <div class="col-lg-4 col-xs-12">
+                                <div class="balloon text-center mt-rem-2-50">
+                                    Листай на кнопки влево или вправо, чтобы узнать больше информации
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-xs-12">
+                                <div class="balloon balloon_gray h-100">
+                                    <h4 class="mb-rem-0-75">
+                                        Выбирай трек дня
+                                    </h4>
+                                    <p class="text text-m mb-rem-2-0">
+                                        Один трек — это одна тема с различными практиками и интерактивами.
+                                        ты можешь выбрать любой трек в альбоме и перейти к нему
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-xs-6">
+                                            <img class="mb-rem-0-50"
+                                                src="user/img/intro/playlist-slider-track-1-1.png" alt="">
+                                            <p class="text text-s">
+                                                Название 1
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-6 col-xs-6">
+                                            <img class="mb-rem-0-50"
+                                                src="user/img/intro/playlist-slider-track-1-2.png" alt="">
+                                            <p class="text text-s">
+                                                Название 1
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="playlist-slider__slide-content">
+                        <div class="row h-100">
+                            <div class="col-lg-4 col-xs-12">
+                                <p class="text text-m text-gray-1 mt-rem-2-50">
+                                    Как настоящий музыкант не держи ноты в голове, лучше напиши на бумаге!
+                                </p>
+                            </div>
+                            <div class="col-lg-8 col-xs-12">
+                                <div class="balloon balloon_gray h-100">
+                                    <h4 class="mb-rem-0-75">
+                                        Подбирай под себя
+                                    </h4>
+                                    <p class="text text-m mb-rem-2-0">
+                                        Собираем для вас — это подборка статей, которая формируется
+                                        на основе трека. Погрузись в плейлист еще больше и изведай тайны
+                                        музыки.
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-xs-3">
+                                            <img class="mb-rem-0-50"
+                                                src="user/img/intro/playlist-slider-track-2-1.png" alt="">
+                                            <p class="text text-s">
+                                                Название 1
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-3 col-xs-3">
+                                            <img class="mb-rem-0-50"
+                                                src="user/img/intro/playlist-slider-track-2-2.png" alt="">
+                                            <p class="text text-s">
+                                                Название 1
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-3 col-xs-3">
+                                            <img class="mb-rem-0-50"
+                                                src="user/img/intro/playlist-slider-track-2-3.png" alt="">
+                                            <p class="text text-s">
+                                                Название 1
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-3 col-xs-3">
+                                            <img class="mb-rem-0-50"
+                                                src="user/img/intro/playlist-slider-track-2-4.png" alt="">
+                                            <p class="text text-s">
+                                                Название 1
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="playlist-slider__slide-content">
+                        <div class="row h-100">
+                            <div class="col-lg-4 col-xs-12">
+                                <p class="text text-m text-gray-1 mt-rem-2-50">
+                                    Как настоящий музыкант не держи ноты в голове, лучше напиши на бумаге!
+                                </p>
+                            </div>
+                            <div class="col-lg-8 col-xs-12">
+                                <div class="balloon balloon_gray h-100">
+                                    <h4 class="mb-rem-0-75">
+                                        Сохраняй понравившееся
+                                    </h4>
+                                    <p class="text text-m mb-rem-2-0">
+                                        Встретились при прослушивании — это микс всех трендовых лайфхаков.
+                                        Здесь ты увидишь музыку, которая поддержит в любой момент: и в
+                                        грусти, и в радости. Сохраняй файлы, чтобы потом воспользоваться в
+                                        жизни.
+                                    </p>
+                                    <img src="user/img/intro/playlist-slider-track-3-1.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="playlist-slider__slide-content">
+                        <div class="row h-100">
+                            <div class="col-lg-4 col-xs-12">
+                                <p class="text text-m text-gray-1 mt-rem-2-50">
+                                    Как настоящий музыкант не держи ноты в голове, лучше напиши на бумаге!
+                                </p>
+                            </div>
+                            <div class="col-lg-8 col-xs-12">
+                                <div class="balloon balloon_gray h-100 pr-rem-9-25 pb-rem-7-0">
+                                    <h3 class="mb-rem-1-25">
+                                        Готов?
+                                    </h3>
+                                    <p class="text text-xl mb-rem-2-0">
+                                        <span class="text-color-secondary">Наслаждайся</span> музыкой вместе
+                                        с <span class="text-color-secondary">плейлистом руководителя</span>.
+                                        Альбомы под любое настроение, лайфхаки, истории реальных
+                                        знаменитостей — все подобрано специально под тебя!
+                                    </p>
+                                    <img class="pos-a" style="bottom: 34px; right: 31px;" src="user/img/intro/playlist-slider-track-4-1.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<!-- Начало практики Touch -->
+    <div class="container">
+        <div class="row center mb-30 mb-xs-20">
+            <div class="col-lg-16 col-xs-12">
+                <div class="flex flex-column">
+                    <div class="text-info-start">
+                        <p class="text-s hide-xs">
+                            Найди 5&nbsp;отличий между изображениями и&nbsp;отметь их&nbsp;на&nbsp;картинке слева.
+                        </p>
+                        <p class="text-s hide-lg">
+                            Найди 5&nbsp;отличий между изображениями и&nbsp;отметь их&nbsp;на&nbsp;верхней картинке.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-40 mb-xs-20">
+            <div class="col-lg-24 col-xs-12">
+                <div class="touch-practice-block" style="max-width: 100%;">
+                    <div class="image-container">
+                        <img src="user/img/practice/img-practice-4-2-lg.png" class="main-image hide-xs" style="max-height: 492px;">
+                        <img src="user/img/practice/img-practice-4-2-xs.png" class="main-image hide-lg">
+                        <!-- Добавятся области через js -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex jc-center">
+            <button id="submit-btn" class="btn btn-common btn-common_border mb-60 mb-xs-20">
+                <span class="btn-common__text">
+                    Принять ответ
+                </span>
+            </button>
+            <button id="repeat-btn" class="hidden btn btn-common btn-common_border mb-60 mb-xs-20">
+                <span class="btn-common__text">
+                    Попробовать ещё раз
+                </span>
+            </button>
+        </div>
+        
+        <div class="js-hide-reveal js-hidden-contant" data-hidden-id="2">
+            <div id="feedback-block" class="hidden row mb-60 mb-xs-40 mt-xs-20">
+                <div class="col-lg-4 col-xs-12 order-xs-2 align-vertical lmm-margin__right-0">
+                    <div>
+                        <img alt="" src="user/img/pers/img-male-round-1_left.png" width="130" />
+                    </div>
+                </div>
+                <div class="col-lg-18 col-xs-12 order-xs-1 mb-xs-20 align-center align-vertical">
+                    <div class="flex ai-center">
+                        <div class="speech speech_tails speech_tails-left-lg speech_tails-bottom-xs">
+                            <div id="feedback" class="text-m">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="explanation" class="hidden">
+        <!-- конец практики -->
+        <div class="container">
+            <div class="col-lg-18 col-xs-12 mb-100 mb-xs-70">
+                <div class="explanation">
+                    <p class="text text-m text-white">
+                        <span class="text-bold">Длина анкера</span>&nbsp;&mdash; это расстояние между двумя его концами, указанное на&nbsp;чертеже справа. Значит, L = 1500&nbsp;мм = 1,5&nbsp;м (по&nbsp;ГОСТу все размеры на&nbsp;чертежах указываются в&nbsp;миллиметрах).
+                    </p>
+                    <p class="text text-m text-white">
+                        С&nbsp;диаметром резьбы сложнее: на&nbsp;чертеже их&nbsp;два, &empty;19 и &empty;31. Но&nbsp;тебе нужен именно наружный. Поскольку резьба на&nbsp;анкере тоже наружная (то&nbsp;есть по&nbsp;типу болта, а&nbsp;не&nbsp;гайки), её&nbsp;наружный диаметр определяется по&nbsp;краям витков. Согласно чертежу, D = 31&nbsp;мм.
+                    </p>
+                    <p class="text text-m text-white">
+                        <span class="text-bold">Обрати внимание:</span> крепление кровли производится согласно паспортам, разработанным на&nbsp;руднике.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>

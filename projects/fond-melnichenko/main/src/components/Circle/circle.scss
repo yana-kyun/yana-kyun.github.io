@@ -1,0 +1,12 @@
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  border-radius: 50%;
+  background-color: #004F50;
+  &_smile {
+    width: 33px;
+    height: 33px;
+  }
+}

@@ -1,0 +1,175 @@
+@import "../../style/_vars";
+
+.btn {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    outline: 0;
+    user-select: none;
+
+    &-intro {
+        border: none;
+        background-color: transparent;
+        vertical-align: middle;
+        text-transform: none;
+        text-shadow: none;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .25s ease-in-out, box-shadow .25s ease-in-out, transform .2s ease-in-out;
+
+        &:hover {
+        }
+    }
+
+    &-common {
+        border: none;
+        border-radius: 50px;
+        padding: 10px 25px 9px 25px;
+        background-color: rgba(#004F50, 1);
+        vertical-align: middle;
+        text-transform: none;
+        text-shadow: none;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .25s ease-in-out, box-shadow .25s ease-in-out, transform .2s ease-in-out;
+
+        &:hover {
+            background-color: rgba(#004F50, 1);
+            @media (hover: none) and (pointer: coarse) {
+                background-color: $white;
+                color: $primary;
+            }
+        }
+
+        @media (max-width:719px) {
+        }
+
+        &_border {
+            color: #004F50;
+            border: 1px solid #004F50;
+            background-color: transparent;
+    
+            &-white {
+                color: white;
+                background-color: transparent;
+                border: 1px solid white;
+                &:hover {
+                    // background-color: transparent;
+                    background-color: white;
+                    color: #004F50;
+                }
+            }
+    
+            &:hover {
+                // background-color: transparent;
+                background-color: rgba(#004F50, 1);
+                color: rgba($white, 1);
+                &-white {
+                    color: white;
+                }
+                @media (hover: none) and (pointer: coarse) {
+                    background-color: $white;
+                    color: $primary;
+                }
+            }
+    
+            &-icon {
+                padding: 15px 17px;
+                border-radius: 50%;
+    
+                &> svg {
+                    fill: #004F50;
+    
+                    &:hover {
+                        fill: #FFFFFF;
+                    }
+                }
+    
+                &:hover {
+                    background-color: rgba(#004F50, .75);
+                    color: rgba($white, 1);
+                    fill: #FFFFFF;
+                    &> svg {
+                        fill: #FFFFFF;
+                    }
+                }
+            }
+        }
+    
+        &_white {
+            color: #004F50;
+            background-color: white;
+    
+            &:hover {
+                background-color: rgba(white, .3);
+            }
+        }
+    
+        &_prev {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: 1px solid #004F50;
+            background-color: transparent;
+            text-align: center;
+            .icon-arrow-left {
+                vertical-align: middle;
+                width: 32px;
+                height: 32px;
+                fill: rgba(142, 0, 254, 1);
+                transition: .25s;
+            }
+    
+            &:hover {
+                color: white;
+    
+                .icon-arrow-left {
+                    fill: white;
+                }
+            }
+    
+            &-white {
+                color: white;
+                border: 1px solid white;
+    
+                .icon-arrow-left {
+                    fill: white;
+                }
+    
+                &:hover {
+                    background-color: rgba(white, .3);
+                }
+            }
+    
+        }
+    
+        &_splash {
+            border-radius: 30px;
+            padding: 19px 42px 17px 42px;
+            &_black-white {
+                background-color: #FFFFFF;
+                color: black;
+            }
+            &:hover {
+                opacity: .9;
+            }
+        }
+        &__text {
+            font-size: 14px;
+            line-height: 21px!important;
+        }
+    
+        &.disabled,
+        &:disabled {
+            cursor: default;
+            pointer-events: none;
+            opacity: .7;
+
+            &:hover {
+                background-color: $white;
+            }
+        }
+    }
+}

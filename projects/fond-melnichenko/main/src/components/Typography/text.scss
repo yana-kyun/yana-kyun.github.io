@@ -1,0 +1,324 @@
+@import "../../style/_vars";
+
+p {
+	font-family: $Regular;
+}
+
+/* Стили текста */
+.text {
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+    &-info {
+        background-color: $light-gray;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+
+        @media (max-width:719px) {
+            padding: 15px 20px;
+            text-align: start;
+        }
+
+        &-start {
+            background-color: $light-gray;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: start;
+
+            @media (max-width:719px) {
+                padding: 15px 20px;
+            }
+        }
+    }
+
+	&+&,
+	&+.btn {
+		margin-top: 10px;
+	}
+
+	&-38-30 {
+		font-size: 38px;
+	
+		@media (max-width: 719px) {
+			font-size: 30px;
+		} 
+	}
+
+    &-30-22 {
+        font-size: 30px;
+        line-height: 40px!important;
+
+        @media (max-width: 719px) {
+            font-size: 22px;
+            line-height: 30px!important;
+        }
+    }
+	
+	&-35 {
+		font-size: 35px;
+		line-height: 40px;    
+	}
+
+	&-30 {
+		font-size: 30px;
+		line-height: 40px;  
+
+		@media (max-width: 719px) {
+				font-size: 18px;
+				line-height: 27px!important;
+			} 
+	}
+
+	&-xxl {
+		font-size: 24px;
+		line-height: 30px!important;
+
+		@media (max-width: 719px) {
+			font-size: 18px;
+			line-height: 27px!important;
+		}
+	}
+
+	&-xl {
+		font-size: 22px;
+		line-height: 30px!important;
+
+		@media (max-width: 719px) {
+			font-size: 16px;
+			line-height: 24px!important;
+		}
+	}
+
+	&-l {
+		font-size: 18px;
+		line-height: 27px!important;
+
+		@media (max-width: 719px) {
+			font-size: 16px;
+			line-height: 24px!important;
+		}
+	}
+
+	&-m {
+		font-size: 16px;
+		line-height: 24px!important;
+
+		@media (max-width: 719px) {
+			font-size: 14px;
+			line-height:  21px!important;
+		}
+	}
+
+	&-s {
+		font-size: 14px;
+		line-height: 21px!important;
+
+		@media (max-width: 719px) {
+			font-size: 12px;
+			line-height: 18px!important;
+		}
+	}
+
+	&-xs {
+		font-size: 12px;
+		line-height: 16px!important;
+
+		@media (max-width: 719px) {
+			font-size: 10px;
+			line-height: 14px!important;
+		}
+	}
+
+	&-nowrap {
+		white-space: nowrap;
+	}
+
+	&-center {
+		text-align: center;
+		&-lg {
+			@media #{$breakpoint-lg-only} {
+				text-align: center;
+			}
+		}
+	}
+
+	&-right {
+		text-align: right;
+	}
+
+	&-left {
+		text-align: left;
+	}
+
+	&-bold {
+		font-family: $Bold;
+	}
+
+	&-regular {
+		font-family: $Regular;
+	}
+
+	&-uppercase {
+		text-transform: uppercase;
+	}
+
+	&-white {
+		color: $white !important;
+	}
+
+	&-purple {
+		color: $purple !important;
+	}
+
+	&-red {
+		color: $red !important;
+	}
+
+	&-dark-blue {
+		color: rgba($corn, 1) !important;
+	}
+
+	&-blue {
+		color: rgba($candy, 1) !important;
+	}
+
+	&-light-blue {
+		color: rgba($agua, 1) !important;
+	}
+
+	&-gray {
+		color: #8f8e8e;
+	}
+
+	&-gray-2 {
+		color: #c9c9c8;
+	}
+
+	&-gray-light {
+		color: rgba(#000000, .5);
+	}
+
+	&-blue-gray-1 {
+		color: rgba($blue-gray-1, 1) !important;
+	}
+
+	&-blue-gray-2 {
+		color: rgba($blue-gray-2, 1) !important;
+	}
+
+	&-green {
+		color: rgba($green, 1) !important;
+	}
+
+	&-primary {
+		color: rgba($primary, 1) !important;
+	}
+
+	&-ls-1 {
+		letter-spacing: 1px;
+	}
+
+	&-ls-2 {
+		letter-spacing: 2px;
+	}
+
+	&-ls-3 {
+		letter-spacing: 3px;
+	}
+
+	&-ls-4 {
+		letter-spacing: 4px;
+	}
+
+	&-ls-5 {
+		letter-spacing: 5px;
+	}
+
+	@media screen and (max-width: 719px) {
+		&-xs-left {
+			text-align: left !important;
+		}
+
+		&-xs-center {
+			text-align: center;
+		}
+
+		&-xs-right {
+			text-align: right !important;
+		}
+	}
+
+	&-underline {
+		text-decoration: underline;
+		cursor: pointer;
+		color: white;
+        &_normal {
+            text-decoration: underline;
+        }
+	}
+
+	&-underline-default {
+		text-decoration: underline;
+	}
+
+    &-italic {
+        font-style: italic;
+    }
+
+    &-link {
+        text-decoration: underline;
+		cursor: pointer;
+		color: rgba($primary, 1);
+
+        &:link {
+            text-decoration: underline;
+		    cursor: pointer;
+		    color: rgba($primary, 1);
+        }
+
+        /* Посещённая ссылка */
+        &:visited {
+            text-decoration: underline;
+		    cursor: pointer;
+		    color: rgba($primary, 1);
+        }
+
+        /* При наведении */
+        &:hover {
+            text-decoration: underline;
+		    cursor: pointer;
+		    color: rgba($primary, 1);
+        }
+
+        /* В момент клика */
+        &:active {
+            text-decoration: underline;
+		    cursor: pointer;
+		    color: rgba($primary, 1);
+        }
+    }
+
+    &-circle {
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &_primary {
+            background-color: $primary;
+            color: white;
+        }
+    }
+
+	&-with-bg {
+		padding: 8px 12px;
+		background-color: $primary;
+		border-radius: 4px;
+		color: $white;
+	}
+}

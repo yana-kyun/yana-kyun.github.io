@@ -1,0 +1,104 @@
+@import "../../style/vars";
+@import "../../utils/variables/variables";
+
+.rotating-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.rotating-bg img {
+    max-width: fit-content !important;
+    object-fit: contain;
+    transition: transform 0.3s linear;
+    // opacity: 0.3;
+}
+
+.text-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    text-align: center;
+    padding: 0 20px;
+    opacity: 0;
+    // transition: opacity 0.5s ease;
+}
+
+.text-section.active {
+    opacity: 1;
+}
+
+.intro {
+    &-full-screen {
+        position: relative;
+        width: 100%;
+        height: calc(100vh + 76px);
+        top: -75px;
+        z-index: 13000;
+        background-color: $dark-violet;
+    }
+    &-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    &-last-elem {
+        height: 70vh;
+    }
+}
+
+.intro-text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    bottom: 5%;
+    left: 0;
+    opacity: 0;
+    // transform: translateY(-20px); /* Начальное положение — выше */
+    transition: opacity .1s ease, transform .3s ease;
+    
+    &.active {
+        opacity: 1;
+        // transform: translateY(0); /* Возвращается на место */
+    }
+}
+
+.img-vortex {
+    @media #{$breakpoint-lg-only} {
+        width: 1600px;
+    }
+
+    @media #{$breakpoint-xs-only} {
+        width: 600px;
+    }
+}
+
+.intro-text-babble {
+    text-align: start;
+    background-color: rgba($white, .16);
+    border: 1px solid rgba($white, .30);
+    color: $white;
+    backdrop-filter: blur(20px);
+
+    @media #{$breakpoint-lg-only} {
+        max-width: 794px;
+        padding: 14px 20px;
+        border-radius: 8px;
+    }
+    
+    @media #{$breakpoint-xs-only} {
+        max-width: 290px;
+        padding: 8px 10px;
+        border-radius: 5px;
+    }
+}
+
