@@ -1,0 +1,618 @@
+
+  
+// ПЕРЕМЕННЫЕ
+$drk: #000000;
+$lghtDrk: #171717;
+$orng: #d70e2a;
+$wht: #ffffff;
+$lghtGrey: #e6e6e6;
+$maxWidth: 1000px;
+$pad: 25px;
+$gap: 20px;
+$font: "PT-Root-UI_Medium", sans-serif;
+$fsize: 16px;
+$lh: 24px;
+$orngActv: #ce4307;
+$orngFcs: #bc572b;
+
+// ФУНКЦИИ
+@function vw($value, $screenWidth: $maxWidth) {
+  @return #{$value / $screenWidth * 100}vw;
+}
+
+@function em($value) {
+  @return #{$value / 16}em;
+}
+
+// МИКСИНЫ
+@mixin font-face($font-family, $url, $weight) {
+  @font-face {
+    font-family: "#{$font-family}";
+    src: 
+      url("../fonts/#{$url}.woff2") format("woff2"),
+      url("../fonts/#{$url}.woff") format("woff");
+    font-weight: #{$weight};
+    font-display: swap;
+    font-style: normal;
+  }
+}
+
+@mixin adaptiveValue(
+  $property,
+  $startValue,
+  $newValue,
+  $startWidth,
+  $newWidth,
+  $type
+) {
+  $addSize: $startValue - $newValue;
+  @if $type==1 {
+    #{$property}: $startValue + px;
+    @media (max-width: #{$startWidth + px}) {
+      #{$property}: calc(
+        #{$newValue + px} + #{$addSize} *
+          ((100vw - #{$newWidth + px}) / #{$startWidth - $newWidth})
+      );
+    }
+  } @else if $type==2 {
+    #{$property}: $startValue + px;
+    @media (min-width: #{$startWidth + px}) {
+      #{$property}: calc(
+        #{$newValue + px} + #{$addSize} *
+          ((100vw - #{$newWidth + px}) / #{$startWidth - $newWidth})
+      );
+    }
+  } @else {
+    #{$property}: calc(
+      #{$newValue +
+        px} +
+        #{$addSize} *
+        ((100vw - #{$newWidth + px}) / #{$startWidth - $newWidth})
+    );
+  }
+}
+
+// ИМПОРТЫ
+@import "fonts";
+@import "normalize";
+@import "header";
+
+@keyframes showElem {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// ОБЩИЕ СТИЛИ
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  color: $drk;
+  font-family: $font;
+  font-size: $fsize;
+  font-weight: 500;
+}
+
+ul {
+  list-style: none;
+}
+
+a,
+button,
+input {
+  color: inherit;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+picture,
+img,
+svg {
+  display: block;
+}
+
+svg {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  object-fit: cover;
+}
+
+button,
+input {
+  border: none;
+  background: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+// ОБЩИЕ КЛАССЫ
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.container {
+  min-width: 290px;
+  max-width: $maxWidth;
+  margin: 0 auto;
+  padding: 0 $pad;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section_title {
+  padding: 40px 0;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 50px;
+}
+
+.article__title {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+
+// DEZIGN
+
+.dezign {
+  padding-bottom: 60px;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  &__title {
+    padding-top: 40px;
+    padding-bottom: 54px;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+  }
+  &__card {
+    width: calc((100% - $gap * 3) / 4);
+    border-radius: 5px;
+    line-height: $lh;
+    background-position: center 0;
+    background-repeat: no-repeat;
+
+    &-content {
+      padding-top: $gap;
+      &--linedark {
+        border-top: 1px solid rgba(0, 0, 0, 0.1 );
+      }
+      &--linelight {
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+      }
+    }
+    &--first {
+      max-height: 304px;
+      padding: 133px 15px 24px 15px;
+      background-image: url("../img/dezign/banner_galaxy-s10.png");
+      background-position: center 20px;
+      background-color: $lghtDrk;
+      color: $wht;
+      font-size: $fsize - 2px;
+      line-height: $lh - 3px;
+    }
+    &--second {
+      padding-top: 205px;
+      background-image: url("../img/dezign/Group\ 2.png");
+    }
+    &--colours {
+      padding-top: 60px;
+      background-image: url("../img/dezign/colours_s10.svg");
+    }
+    &--gglass {
+      padding-top: 60px;
+      background-image: url("../img/dezign/gorilla_glass.png");
+    }
+  }
+}
+
+// SCANNER
+
+.scanner {
+  padding-bottom: 100px;
+  &__title {
+    padding-top: 40px;
+    padding-bottom: 50px;
+    &::before {
+      content: "Сканер отпечатка в экране";
+    }
+  }
+  &__columns {
+    display: flex;
+    gap: $gap;
+  }
+  &__column {
+    width: calc((100% - $gap) / 2);
+  }
+  &__img {
+    width: 100%;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 40px;
+  }
+  &__card {
+    padding-left: 122px;
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    &-content {
+      line-height: $lh;
+    }
+    &--play {
+      background-image: url("../img/svg/scanner/play.svg");
+    }
+    &--camera {
+      background-image: url("../img/svg/scanner/camera.svg");
+    }
+    &--circles {
+      background-image: url("../img/svg/scanner/circles.svg");
+    }
+  }
+}
+
+// ACCESSORIES
+
+.accessories {
+  padding-bottom: 61px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  &__title {
+    padding-bottom: 53px;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+  }
+  &__card {
+    position: relative;
+    width: calc((100% - $gap * 3) / 4);
+    &:nth-last-child(-n+2)::before {
+      content: "";
+      width: 50px;
+      height: 1px;
+      background-color: #000000;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &-content {
+      line-height: $lh;
+      &--changeText {
+        &::before {
+          content: "Для любителей роскоши, модель S10+ будет выпускаться в керамическом корпусе черного и белого цветов.";
+        }
+      }
+    }
+    &--img {
+      padding-top: 140px;
+      background-position: center 0;
+      background-repeat: no-repeat;
+      background-size: contain;
+      &-first {
+        background-image: url("../img/accessories/galaxy-s10_cases.png");
+      }
+      &-second {
+        background-image: url("../img/accessories/galaxy-s10_power.png");
+      }
+    }
+  }
+  &__card-content {
+    padding-top: $gap;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+// APPS
+
+.apps {
+  padding-bottom: 100px;
+  &__title {
+    padding-top: 40px;
+    padding-bottom: 49px;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+    margin-bottom: -30px;
+  }
+  &__card {
+    width: calc((100% - $gap * 2) / 3);
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-size: 105px 60px;
+    padding-top: 80px;
+    margin-bottom: 30px;
+    &--switch {
+      background-image: url("../img/sprite.svg#services--s");
+    }
+    &--health {
+      background-image: url("../img/sprite.svg#services--run");
+
+    }
+    &--bixby {
+      background-image: url("../img/sprite.svg#services--bixby");
+
+    }
+    &--pay {
+      background-image: url("../img/sprite.svg#services--pay");
+
+    }
+    &--things {
+      background-image: url("../img/sprite.svg#services--things");
+
+    }
+    &-content {
+      line-height: $lh;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .dezign {
+    &__title {
+      padding: 40px 0;
+    }
+    &__list {
+      margin-bottom: -30px;
+    }
+    &__card {
+      width: calc((100% - $gap) / 2);
+      margin-bottom: 30px;
+      &-content {
+        font-size: $fsize - 2px;
+        line-height: $lh - 3px;
+      }
+      &--first {
+        background-image: url("../img/dezign/banner_galaxy-s10-720.png");
+        max-height: none;
+        padding: 204px 15px 25px 15px;
+        background-position: center 20px;
+      }
+      &--second {
+        padding-top: 205px;
+        background-image: url("../img/dezign/Group\ 2.png");
+      }
+      &--colours {
+        padding-top: 60px;
+        background-image: url("../img/dezign/colours_s10.svg");
+      }
+      &--gglass {
+        padding-top: 60px;
+        background-image: url("../img/dezign/gorilla_glass.png");
+      }
+    }
+  }
+
+  .scanner {
+    &__title {
+      &::before {
+        content: "Съемка видео";
+      }
+    }
+    &__card-content {
+      font-size: $fsize - 2px;
+      line-height: $lh - 3px;
+    }
+  }
+
+  .accessories {
+    &__title {
+      padding-bottom: 40px;
+    }
+    &__list {
+      margin-bottom: -30px;
+    }
+    &__card {
+      width: calc((100% - $gap) / 2);
+      margin-bottom: 30px;
+      &-content {
+        font-size: $fsize - 2px;
+        line-height: $lh - 3px;
+        &--changeText {
+          &::before {
+            content: "Обширный ассортимент чехлов для каждой модели. Цветовая гамма,отличное качество, премиальные материалы и дополнительные возможности призваны удовлетворить даже самый притязательный вкус.";
+          }
+        }
+      }
+      &--img {
+        padding-top: 193px;
+      }
+    }
+  }
+
+  .apps {
+    &__card {
+    margin-bottom: 20px;
+
+      &-content {
+        font-size: $fsize - 2px;
+        line-height: $lh - 3px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 $pad - 10px;
+  }
+
+  .section_title {
+    padding: 30px 0;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .article__title {
+    font-size: 22px;
+    line-height: 31px;
+  }
+
+  .dezign {
+    padding-top: 20px;
+    padding-bottom: 50px;
+    &__title {
+      padding-top: 0;
+      padding-bottom: 30px;
+    }
+    &__list {
+      gap: 0;
+      margin-bottom: -40px;
+    }
+    &__card {
+      margin-bottom: 40px;
+      &-content {
+        font-size: $fsize - 4px;
+        line-height: $lh - 7px;
+        &--linelight, &--linedark {
+          font-size: $fsize - 2px;
+          line-height: $lh - 3px;
+        }
+      }
+      &--first {
+        width: 100%;
+        background-image: url("../img/dezign/banner_galaxy-s10-320.png");
+        padding: 177px 15px 26px 15px;
+      }
+      &--second {
+        order: 1;
+        width: 100%;
+      }
+      &--colours {
+        width: calc((100% - 8px) / 2);
+      }
+      &--gglass {
+        width: calc((100% - 8px) / 2);
+      }
+    }
+  }
+
+  .scanner {
+    padding-bottom: 40px;
+    &__title {
+      padding-top: 20px;
+      padding-bottom: 30px;
+    }
+    &__columns {
+      flex-direction: column;
+      gap: 30px;
+    }
+    &__column {
+      width: 100%;
+    }
+    &__img {
+      min-height: 170px;
+    }
+    &__list {
+      gap: 30px;
+    }
+    &__card {
+      padding-left: 0;
+      padding-top: 80px;
+      background-position: center 0;
+    }
+  }
+
+  .accessories {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    &__title {
+      padding-bottom: 30px;
+    }
+    &__list {
+      gap: 0;
+      margin-bottom: -40px;
+    }
+    &__card {
+      margin-bottom: 40px;
+      &--img {
+        width: 100%;
+        padding-top: 175px;
+      }
+      &-content{
+        &--changeText2::before {
+          content: "Беспроводная зарядная станция Duo Pad быстро заряжает одновременно два устройства, одно из которых охлаждается.";
+        }
+      }
+      &:nth-last-child(-n+2) {
+        width: calc((100% - 8px) / 2);
+        &  > p {
+          font-size: $fsize - 4px;
+          line-height: $lh - 7px;
+        }
+      }
+    }
+  }
+
+  .apps {
+    padding-top: 19px;
+    &__title {
+      padding: 0;
+    }
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    &__card {
+      margin-bottom: 0;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-size: 100px 70px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1 );
+      }
+      &:nth-child(2n+1) {
+        padding-left: 85px;
+        background-position: -13px center;
+      }
+      &:nth-child(2n) {
+        padding-right: 100px;
+        background-position: right center;
+      }
+      &-content {
+        font-size: $fsize - 4px;
+        line-height: $lh - 7px;
+      }
+    }
+  }
+}

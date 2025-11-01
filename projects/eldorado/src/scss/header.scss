@@ -1,0 +1,164 @@
+@keyframes showSearch {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes hideElem {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+.header {
+  position: relative;
+  padding-top: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid $lghtGrey;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  &__logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  &__logos--logo_e {
+    width: 35px;
+    height: 35px;
+  }
+  &__logos--logo_m {
+    width: 40px;
+    height: 40px;
+  } 
+  &__title {
+    font-size: 14px;
+    line-height: 21px;
+  }
+  &__mob {
+    display: none;
+    padding: 5px 0;
+    font-size: 10px;
+    line-height: 14px;
+    background-color: #f9f9f9;
+  }
+  &::after {
+    content: "";
+    width: 207px;
+    height: 3px;
+    background-color: $orng;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+  }
+}
+
+.hamburger-menu {
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+
+#menu__toggle {
+  height: 0;
+  opacity: 0;
+  &:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+    &::before {
+      top: 0;
+      transform: rotate(0);
+    }
+    &::after {
+      top: 0;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.menu__btn {
+  position: absolute;
+  top: 5px;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 16px;
+  padding: 8px 4px;
+  cursor: pointer;
+  z-index: 1;
+  &> span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: $orng;
+    transition-duration: .25s;
+    &::before, &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: $orng;
+      transition-duration: .25s;
+    }
+    &::before {
+      top: -7px;
+    }
+    &::after {
+      top: 7px;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .header {
+    &::after {
+      width: 149px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 8px 0;
+    &__title {
+      display: none;
+    }
+    &::after {
+      display: none;
+    }
+    &__logos {
+      gap: 15px;
+      &--logo_e {
+        width: 25px;
+        height: 25px;
+      }
+      &--logo_m {
+        width: 30px;
+        height: 30px;
+      } 
+    }
+    &__mob {
+      display: block;
+    }
+
+  }
+}
