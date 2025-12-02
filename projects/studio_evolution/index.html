@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль</title>
+  <link rel="stylesheet" href="dist/bundle.css">
+</head>
+<body class="bg-white text-dark-main font-sans">
+
+  <div x-data="profileForm" x-init="init()" class="mx-auto p-5 sm:p-[30px] lg:p-20 max-w-[1680px] 2xl:px-[80px]">
+
+    <article class="flex items-center justify-between mb-7">
+      <div class="flex items-center">
+
+        <div 
+          @mousedown="handlePhotoClick()" 
+          @mouseup="handlePhotoMouseUp()" 
+          @mouseleave="handlePhotoMouseLeave()"
+          x-bind:class="{
+            'bg-gray-200': !isPhotoUploaded && !isPressed,
+            'bg-gray-300': !isPhotoUploaded && isPressed,
+            'bg-gray-200': isPhotoUploaded && !isPressed,
+            'bg-gray-300': isPhotoUploaded && isPressed
+          }"
+          class="mr-5 w-100px h-100px rounded-full flex items-center justify-center border-1 border-gray-text cursor-pointer transition-colors"
+        >
+          <template x-if="!isPhotoUploaded">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_2719_29283)">
+                <path d="M50 39.96C43.36 39.96 37.96 45.36 37.96 52C37.96 58.64 43.36 64.04 50 64.04C56.64 64.04 62.04 58.64 62.04 52C62.04 45.36 56.64 39.96 50 39.96ZM55.52 53.76H52V57.28C52 58.4 51.12 59.28 50 59.28C48.88 59.28 48 58.4 48 57.28V53.76H44.48C43.36 53.76 42.48 52.88 42.48 51.76C42.48 50.64 43.36 49.76 44.48 49.76H48V46.24C48 45.12 48.88 44.24 50 44.24C51.12 44.24 52 45.12 52 46.24V49.76H55.52C56.64 49.76 57.52 50.64 57.52 51.76C57.52 52.88 56.6 53.76 55.52 53.76ZM73.6 32.2H64.84C64.08 32.2 63.4 31.76 63.04 31.08L60.72 26.4C60.04 25.04 58.64 24.2 57.16 24.2H42.92C41.4 24.2 40 25.04 39.36 26.4L37 31.08C36.68 31.76 35.96 32.2 35.2 32.2H26.4C23.08 32.2 20.4 34.88 20.4 38.2V65.8C20.4 69.12 23.08 71.8 26.4 71.8H73.6C76.92 71.8 79.6 69.12 79.6 65.8V38.2C79.6 34.88 76.92 32.2 73.6 32.2ZM50 68.04C41.12 68.04 33.96 60.84 33.96 52C33.96 43.12 41.16 35.96 50 35.96C58.84 35.96 66.04 43.16 66.04 52C66.04 60.88 58.88 68.04 50 68.04Z" fill="#979797"/>
+              </g>
+            <rect x="0.5" y="0.5" width="99" height="99" rx="49.5" stroke="#979797"/>
+            <defs>
+              <clipPath id="clip0_2719_29283">
+                <rect width="100" height="100" rx="50" fill="white"/>
+              </clipPath>
+            </defs>
+            </svg>
+          </template>
+          <template x-if="isPhotoUploaded">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_2657_30625)">
+                <path d="M49.9999 39.9602C43.3599 39.9602 37.9599 45.3602 37.9599 52.0002C37.9599 58.6402 43.3599 64.0402 49.9999 64.0402C56.6399 64.0402 62.0399 58.6402 62.0399 52.0002C62.0399 45.3602 56.6399 39.9602 49.9999 39.9602ZM55.5199 53.7602H51.9999V57.2802C51.9999 58.4002 51.1199 59.2802 49.9999 59.2802C48.8799 59.2802 47.9999 58.4002 47.9999 57.2802V53.7602H44.4799C43.3599 53.7602 42.4799 52.8802 42.4799 51.7602C42.4799 50.6402 43.3599 49.7602 44.4799 49.7602H47.9999V46.2402C47.9999 45.1202 48.8799 44.2402 49.9999 44.2402C51.1199 44.2402 51.9999 45.1202 51.9999 46.2402V49.7602H55.5199C56.6399 49.7602 57.5199 50.6402 57.5199 51.7602C57.5199 52.8802 56.5999 53.7602 55.5199 53.7602ZM73.5999 32.2002H64.8399C64.0799 32.2002 63.3999 31.7602 63.0399 31.0802L60.7199 26.4002C60.0399 25.0402 58.6399 24.2002 57.1599 24.2002H42.9199C41.3999 24.2002 39.9999 25.0402 39.3599 26.4002L36.9999 31.0802C36.6799 31.7602 35.9599 32.2002 35.1999 32.2002H26.3999C23.0799 32.2002 20.3999 34.8802 20.3999 38.2002V65.8002C20.3999 69.1202 23.0799 71.8002 26.3999 71.8002H73.5999C76.9199 71.8002 79.5999 69.1202 79.5999 65.8002V38.2002C79.5999 34.8802 76.9199 32.2002 73.5999 32.2002ZM49.9999 68.0402C41.1199 68.0402 33.9599 60.8402 33.9599 52.0002C33.9599 43.1202 41.1599 35.9602 49.9999 35.9602C58.8399 35.9602 66.0399 43.1602 66.0399 52.0002C66.0399 60.8802 58.8799 68.0402 49.9999 68.0402Z" fill="#979797"/>
+                <circle cx="50" cy="50" r="50" fill="black" fill-opacity="0.75"/>
+                <rect x="36" y="36" width="28" height="28" rx="6" fill="#FFCE00"/>
+                <path d="M45.3 47.6999C44.9 47.2999 44.9 46.6999 45.3 46.2999L49.3 42.2999C49.4 42.1999 49.5 42.0999 49.6 42.0999C49.8 41.9999 50.1 41.9999 50.4 42.0999C50.5 42.1999 50.6 42.1999 50.7 42.2999L54.7 46.2999C55.1 46.6999 55.1 47.2999 54.7 47.6999C54.5 47.8999 54.3 47.9999 54 47.9999C53.7 47.9999 53.5 47.8999 53.3 47.6999L51 45.3999V52.4999C51 53.0999 50.6 53.4999 50 53.4999C49.4 53.4999 49 53.0999 49 52.4999V45.3999L46.7 47.6999C46.3 48.0999 45.7 48.0999 45.3 47.6999ZM55 49.9999C54.4 49.9999 54 50.3999 54 50.9999V53.9999C54 54.5999 53.6 54.9999 53 54.9999H47C46.4 54.9999 46 54.5999 46 53.9999V50.9999C46 50.3999 45.6 49.9999 45 49.9999C44.4 49.9999 44 50.3999 44 50.9999V53.9999C44 55.6999 45.3 56.9999 47 56.9999H53C54.7 56.9999 56 55.6999 56 53.9999V50.9999C56 50.3999 55.6 49.9999 55 49.9999Z" fill="#212121"/>
+              </g>
+            <rect x="0.5" y="0.5" width="99" height="99" rx="49.5" stroke="#979797"/>
+            <defs>
+              <clipPath id="clip0_2657_30625">
+                <rect width="100" height="100" rx="50" fill="white"/>
+              </clipPath>
+            </defs>
+            </svg>
+          </template>
+        </div>
+        <div class="flex flex-col justify-between items-start">
+          <h1 class="text-[21px] sm:text-[32px] font-bold sm:mt-1 sm:mb-2 mt-2 mb-0 leading-6 sm:leading-normal">Федор Семенов</h1>
+          <p class="text-sm sm:text-2xl text-gray-text font-semibold mb-0">Турция, Османие</p>
+          <a href="mailto:zanzak17@gmail.com" class="text-sm text-accent font-semibold sm:mt-2 mt-1">zanzak17@gmail.com</a>
+        </div>
+      </div>
+      <button 
+        @click="logout()"
+        class="btn-gray lg:hidden hidden sm:block justify-self-end sm:text-[16px]"
+      >
+        Выйти из профиля
+      </button>
+    </article>
+
+    <section class="lg:bg-gray-light lg:rounded-20px">
+      <div class="border-b-2 border-gray">  
+          <button 
+            class="text-sm sm:text-xl sm:pb-2 pb-1 lg:pt-5 lg:ml-[30px] border-b-2 border-primary text-dark-main font-semibold"
+          >
+            Ваши данные
+          </button>
+      </div>
+
+      <form @submit.prevent="saveProfile()" class="space-y-7 lg:py-7 sm:py-[34px] pt-5 pb-[30px]">
+        <section class="border-b border-gray-hover pb-[29px]">
+          <h2 class="text-xl lg:text-2xl font-bold lg:px-[30px]">Ваши данные</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 lg:gap-x-[30px] gap-y-[20px] lg:gap-y-5 mt-[20px!important] sm:mt-[14px!important] lg:px-[30px]">
+            <div>
+              <label for="firstName" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold sm:mb-[10px] mb-[5px]">Имя</label>
+              <input 
+                id="firstName"
+                type="text" 
+                x-model="firstName"
+                :class="{'!border-danger': errors.firstName}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main input-placeholder-responsive input-hover-placeholder input-active-placeholder"
+                placeholder="Имя"
+              />
+              <div x-show="errors.firstName" class="mt-1 text-xs sm:text-sm text-danger">Имя</div>
+            </div>
+
+            <div>
+              <label for="lastName" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">Фамилия</label>
+              <input 
+                id="lastName"
+                type="text" 
+                x-model="lastName"
+                :class="{'!border-danger': errors.lastName}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main input-placeholder-responsive input-hover-placeholder input-active-placeholder"
+                placeholder="Фамилия"
+              />
+              <div x-show="errors.lastName" class="mt-1 text-xs sm:text-sm text-danger">Фамилия</div>
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">Телефон</label>
+              <input 
+                id="phone"
+                type="text" 
+                x-bind:value="phone"
+                @input="handlePhoneInput($event)"
+                :class="{'!border-danger': errors.phone}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main input-placeholder-responsive input-hover-placeholder input-active-placeholder"
+                :placeholder="phonePlaceholder"
+              />
+              <div x-show="errors.phone" class="mt-1 text-xs sm:text-sm text-danger">Телефон</div>
+            </div>
+            
+            <div class="sm:mt-[30px!important] lg:mt-[18px!important]">
+              <button 
+                type="button"
+                @click=""
+                class="btn-gray lg:bg-white lg:border lg:hover:bg-gray lg:border-gray-hover"
+              >
+                Изменить пароль
+              </button>
+            </div>
+          </div>
+
+          
+        </section>
+        
+        <section class="border-b border-gray-hover pb-[25px]">
+          <h2 class="text-lg sm:text-xl lg:text-2xl font-bold lg:px-[30px]">Ваше местоположение</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 lg:gap-x-[30px] gap-y-[14px] lg:gap-y-5 mt-[14px!important] lg:px-[30px]">
+            <div>
+              <label for="country" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">Страна</label>
+              <div x-data="dropdown([{label: 'Россия', value: 'RU'}, {label: 'Беларусь', value: 'BY'}], selectedCountryIso, onCountryChange)"
+                x-init="selected = selectedCountryIso"
+                class="relative w-full"
+              >
+                <div 
+                  @click="toggle()"
+                  :class="{
+                    '!border-danger': errors.country,
+                    'border-dark-main': true,
+                    'border-gray-text': true
+                  }"
+                  class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border rounded-[10px] bg-white cursor-pointer flex justify-between items-center"
+                >
+                  <span x-text="displayText" class="text-gray-text"></span>
+                </div>
+
+                <div 
+                  x-show="isOpen" 
+                  @click.outside="close()"
+                  class="absolute z-10 max-w-fit bg-white border border-dark-main rounded-[10px] shadow-lg"
+                >
+                  <div class="px-[15px] py-[10px] lg:px-5 lg:py-[15px] flex items-center">
+                    <input 
+                      x-ref="searchInput"
+                      type="text" 
+                      x-model="searchQuery"
+                      placeholder="Поиск"
+                      class="flex-grow px-2 py-1 border border-gray-text rounded-[10px] focus:outline-none"
+                      @keydown.enter.prevent="$event.target.blur()"
+                    />
+                    <template x-html="document.getElementById('icon-search').innerHTML"></template>
+                  </div>
+                  <ul class="max-h-60 overflow-y-auto">
+                    <template x-for="option in filteredOptions" :key="option.value">
+                      <li 
+                        @click="select(option)"
+                        :class="{
+                          'bg-gray-100': option.value === selected,
+                          'hover:bg-gray-50': option.value !== selected
+                        }"
+                        class="px-[15px] py-[10px] lg:px-5 lg:py-[15px] cursor-pointer text-gray-800"
+                      >
+                        <span x-text="option.label"></span>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
+              </div>
+              <div x-show="errors.country" class="mt-1 text-xs sm:text-sm text-danger">Страна</div>
+            </div>
+
+            <div>
+              <label for="city" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">Город</label>
+              <select 
+                id="city"
+                x-model="city"
+                :disabled="!selectedCountryIso || getCityOptions().length === 0"
+                :class="{'!border-danger': errors.city, 'opacity-50 cursor-not-allowed': !selectedCountryIso || getCityOptions().length === 0}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main"
+              >
+                <option value="" disabled selected>Выберите город</option>
+                <template x-for="city in getCityOptions()" :key="city">
+                  <option :value="city" x-text="city"></option>
+                </template>
+              </select>
+              <div x-show="errors.city" class="mt-1 text-xs sm:text-sm text-danger">Город</div>
+            </div>
+          </div>
+        </section>
+        
+        <section class="border-b border-gray-hover pb-[30px]">
+          <h2 class="text-lg sm:text-xl lg:text-2xl font-bold lg:px-[30px]">Данные вашего заведения</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 lg:gap-x-[30px] gap-y-[14px] lg:gap-y-5 mt-[14px!important] lg:px-[30px]">
+            <div>
+              <label for="clubName" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">Название заведения</label>
+              <input 
+                id="clubName"
+                type="text" 
+                x-model="clubName"
+                :class="{'!border-danger': errors.clubName}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main input-placeholder-responsive input-hover-placeholder input-active-placeholder"
+                placeholder="Название заведения"
+              />
+              <div x-show="errors.clubName" class="mt-1 text-xs sm:text-sm text-danger">Название заведения</div>
+            </div>
+
+            <div>
+              <label for="clubAddress" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">Адрес заведения</label>
+              <input 
+                id="clubAddress"
+                type="text"   
+                x-model="clubAddress"
+                :class="{'!border-danger': errors.clubAddress}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main input-placeholder-responsive input-hover-placeholder input-active-placeholder"
+                placeholder="Адрес заведения"
+              />
+              <div x-show="errors.clubAddress" class="mt-1 text-xs sm:text-sm text-danger">Адрес заведения</div>
+            </div>
+
+            <div>
+              <label for="clubSite" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">Сайт заведения</label>
+              <input 
+                id="clubSite"
+                type="text" 
+                x-model="clubSite"
+                :class="{'!border-danger': errors.clubSite}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main input-placeholder-responsive input-hover-placeholder input-active-placeholder"
+                placeholder="Сайт заведения"
+              />
+              <div x-show="errors.clubSite" class="mt-1 text-xs sm:text-sm text-danger">Сайт заведения</div>
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm sm:text-[16px] lg:text-lg font-bold sm:font-semibold mb-[10px]">E-mail</label>
+              <input 
+                id="email"
+                type="email" 
+                x-model="email"
+                :class="{'!border-danger': errors.email}"
+                class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border border-gray-text rounded-[10px] focus:border-dark-main hover:border-dark-main  active:border-dark-main input-placeholder-responsive input-hover-placeholder input-active-placeholder"
+                placeholder="email"
+              />
+              <div x-show="errors.email" class="mt-1 text-xs sm:text-sm text-danger">E-mail</div>
+            </div>
+          </div>
+        </section>
+        
+
+        <div class="flex justify-between space-x-4 lg:px-[30px]">
+          <div class="flex justify-between gap-5">
+            <button 
+              type="submit"
+              class="btn-gray lg:bg-white lg:border lg:hover:bg-gray lg:border-gray-hover"
+            >
+              Сохранить
+            </button>
+            <button 
+              type="button"
+              @click="cancel()"
+              class="btn-gray lg:bg-white lg:border lg:hover:bg-gray lg:border-gray-hover"
+            >
+              Отмена
+            </button>
+          </div>
+          <button 
+            @click="logout()"
+            class="btn-gray hidden sm:block"
+          >
+            Выйти из профиля
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+  <div class="sm:hidden py-[30px] bg-gray-light flex items-center justify-center">
+      <button 
+        @click="logout()"
+        class="btn-gray border border-gray-hover sm:hidden"
+      >
+        Выйти из профиля
+      </button>
+  </div>
+  <template id="icon-arrow-down">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 20C15.7 20 15.5 19.9 15.3 19.7L11.3 15.7C10.9 15.3 10.9 14.7 11.3 14.3C11.7 13.9 12.3 13.9 12.7 14.3L16 17.6L19.3 14.3C19.7 13.9 20.3 13.9 20.7 14.3C21.1 14.7 21.1 15.3 20.7 15.7L16.7 19.7C16.5 19.9 16.3 20 16 20Z" fill="#212121"/>
+    </svg>
+  </template>
+
+  <template id="icon-arrow-up">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 18C19.7 18 19.5 17.9 19.3 17.7L16 14.4L12.7 17.7C12.3 18.1 11.7 18.1 11.3 17.7C10.9 17.3 10.9 16.7 11.3 16.3L15.3 12.3C15.7 11.9 16.3 11.9 16.7 12.3L20.7 16.3C21.1 16.7 21.1 17.3 20.7 17.7C20.5 17.9 20.3 18 20 18Z" fill="#212121"/>
+    </svg>
+  </template>
+
+  <template id="icon-search">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M26.1998 21.9L21.9998 17.7C21.1998 16.9 19.9998 16.9 19.1998 17.7L17.8998 16.4C18.6998 15.2 19.2998 13.8 19.2998 12.3C19.2998 8.40005 16.0998 5.30005 12.2998 5.30005C8.3998 5.30005 5.2998 8.40005 5.2998 12.3C5.2998 16.2 8.3998 19.3 12.2998 19.3C13.8998 19.3 15.3998 18.8 16.5998 17.9L17.7998 19.1C16.9998 19.9 16.9998 21.1 17.7998 21.9L21.9998 26.1C22.3998 26.5 22.8998 26.7001 23.3998 26.7001C23.8998 26.7001 24.3998 26.5 24.7998 26.1L26.1998 24.7001C26.8998 24 26.8998 22.7 26.1998 21.9ZM12.2998 17.3C9.4998 17.3 7.2998 15.1 7.2998 12.3C7.2998 9.50005 9.4998 7.30005 12.2998 7.30005C15.0998 7.30005 17.2998 9.50005 17.2998 12.3C17.2998 15.1 15.0998 17.3 12.2998 17.3ZM23.2998 24.7001L19.0998 20.5L20.4998 19.1L24.6998 23.3L23.2998 24.7001Z" fill="#212121"/>
+    </svg>
+  </template>
+  <script src="dist/bundle.js"></script>
+</body>
+</html>

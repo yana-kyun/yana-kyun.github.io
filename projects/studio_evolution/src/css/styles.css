@@ -1,0 +1,41 @@
+@import './_fonts.css'; 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply px-[30px] py-[6px] text-sm sm:text-[16px] lg:text-lg font-semibold font-display rounded-20px bg-white text-dark-main border border-gray-hover hover:bg-gray transition-colors;
+}
+
+.btn-gray {
+  @apply px-[30px] py-[6px] text-sm sm:text-[16px] lg:text-lg font-semibold font-display rounded-20px bg-gray text-dark-main hover:bg-gray-hover transition-colors;
+}
+
+.input-hover-placeholder:hover::placeholder,
+.input-hover-placeholder:focus-visible:not(:active)::placeholder {
+  @apply text-gray-text outline-dark-main;
+}
+
+.input-hover-placeholder:focus-visible:not(:active) {
+  @apply outline-none;
+}
+
+.input-active-placeholder:active::placeholder {
+  @apply text-dark-main;
+}
+
+.input-placeholder-responsive::placeholder {
+  @apply text-xs;
+}
+
+@media (min-width: 640px) {
+  .input-placeholder-responsive::placeholder {
+    @apply text-sm;
+  }
+}
+
+@media (min-width: 768px) {
+  .input-placeholder-responsive::placeholder {
+    @apply text-[16px];
+  }
+}
