@@ -16,8 +16,8 @@
   @apply text-gray-text outline-dark-main;
 }
 
-.input-hover-placeholder:focus-visible:not(:active) {
-  @apply outline-none;
+.input-hover-placeholder:focus-visible:active {
+  @apply outline-none outline-offset-0;
 }
 
 .input-active-placeholder:active::placeholder {

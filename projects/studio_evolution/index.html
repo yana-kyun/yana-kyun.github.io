@@ -6,7 +6,7 @@
   <title>Профиль</title>
   <link rel="stylesheet" href="dist/bundle.css">
 </head>
-<body class="bg-white text-dark-main font-sans">
+<body class="bg-white text-dark-main font-sans min-w-80">
 
   <div x-data="profileForm" x-init="init()" class="mx-auto p-5 sm:p-[30px] lg:p-20 max-w-[1680px] 2xl:px-[80px]">
 
@@ -150,17 +150,31 @@
                   :class="{
                     '!border-danger': errors.country,
                     'border-dark-main': true,
-                    'border-gray-text': true
+                    'border-gray-text': true,
+                    'rounded-b-none': isOpen,
+                    'border-dark-main': isOpen
                   }"
-                  class="w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border rounded-[10px] bg-white cursor-pointer flex justify-between items-center"
+                  class="relative w-full px-[14px] py-[7px] lg:px-5 lg:py-[15px] border rounded-[10px] bg-white cursor-pointer flex justify-between items-center"
                 >
                   <span x-text="displayText" class="text-gray-text"></span>
+                  <div class="absolute w-8 h-8 lg:top-[10px] lg:right-[10px] top-1 right-1 z-10">
+                    <template x-if="!isOpen">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 20C15.7 20 15.5 19.9 15.3 19.7L11.3 15.7C10.9 15.3 10.9 14.7 11.3 14.3C11.7 13.9 12.3 13.9 12.7 14.3L16 17.6L19.3 14.3C19.7 13.9 20.3 13.9 20.7 14.3C21.1 14.7 21.1 15.3 20.7 15.7L16.7 19.7C16.5 19.9 16.3 20 16 20Z" fill="#212121"/>
+                      </svg>
+                    </template>
+                    <template x-if="isOpen">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 18C19.7 18 19.5 17.9 19.3 17.7L16 14.4L12.7 17.7C12.3 18.1 11.7 18.1 11.3 17.7C10.9 17.3 10.9 16.7 11.3 16.3L15.3 12.3C15.7 11.9 16.3 11.9 16.7 12.3L20.7 16.3C21.1 16.7 21.1 17.3 20.7 17.7C20.5 17.9 20.3 18 20 18Z" fill="#212121"/>
+                      </svg>
+                    </template>
+                  </div>
                 </div>
 
                 <div 
                   x-show="isOpen" 
                   @click.outside="close()"
-                  class="absolute z-10 max-w-fit bg-white border border-dark-main rounded-[10px] shadow-lg"
+                  class="absolute w-full z-10 bg-white border border-dark-main rounded-t-none rounded-b-[10px] shadow-lg"
                 >
                   <div class="px-[15px] py-[10px] lg:px-5 lg:py-[15px] flex items-center">
                     <input 
@@ -168,10 +182,14 @@
                       type="text" 
                       x-model="searchQuery"
                       placeholder="Поиск"
-                      class="flex-grow px-2 py-1 border border-gray-text rounded-[10px] focus:outline-none"
+                      class="relative flex-grow px-4 py-1 border border-gray-text rounded-[10px] focus:outline-none"
                       @keydown.enter.prevent="$event.target.blur()"
                     />
-                    <template x-html="document.getElementById('icon-search').innerHTML"></template>
+                    <div class="absolute w-8 h-8 lg:top-[15px!important] lg:right-[20px!important] top-2 right-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M26.1998 21.9L21.9998 17.7C21.1998 16.9 19.9998 16.9 19.1998 17.7L17.8998 16.4C18.6998 15.2 19.2998 13.8 19.2998 12.3C19.2998 8.40005 16.0998 5.30005 12.2998 5.30005C8.3998 5.30005 5.2998 8.40005 5.2998 12.3C5.2998 16.2 8.3998 19.3 12.2998 19.3C13.8998 19.3 15.3998 18.8 16.5998 17.9L17.7998 19.1C16.9998 19.9 16.9998 21.1 17.7998 21.9L21.9998 26.1C22.3998 26.5 22.8998 26.7001 23.3998 26.7001C23.8998 26.7001 24.3998 26.5 24.7998 26.1L26.1998 24.7001C26.8998 24 26.8998 22.7 26.1998 21.9ZM12.2998 17.3C9.4998 17.3 7.2998 15.1 7.2998 12.3C7.2998 9.50005 9.4998 7.30005 12.2998 7.30005C15.0998 7.30005 17.2998 9.50005 17.2998 12.3C17.2998 15.1 15.0998 17.3 12.2998 17.3ZM23.2998 24.7001L19.0998 20.5L20.4998 19.1L24.6998 23.3L23.2998 24.7001Z" fill="#212121"/>
+                      </svg>
+                    </div>
                   </div>
                   <ul class="max-h-60 overflow-y-auto">
                     <template x-for="option in filteredOptions" :key="option.value">
@@ -302,24 +320,7 @@
       >
         Выйти из профиля
       </button>
-  </div>
-  <template id="icon-arrow-down">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 20C15.7 20 15.5 19.9 15.3 19.7L11.3 15.7C10.9 15.3 10.9 14.7 11.3 14.3C11.7 13.9 12.3 13.9 12.7 14.3L16 17.6L19.3 14.3C19.7 13.9 20.3 13.9 20.7 14.3C21.1 14.7 21.1 15.3 20.7 15.7L16.7 19.7C16.5 19.9 16.3 20 16 20Z" fill="#212121"/>
-    </svg>
-  </template>
-
-  <template id="icon-arrow-up">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 18C19.7 18 19.5 17.9 19.3 17.7L16 14.4L12.7 17.7C12.3 18.1 11.7 18.1 11.3 17.7C10.9 17.3 10.9 16.7 11.3 16.3L15.3 12.3C15.7 11.9 16.3 11.9 16.7 12.3L20.7 16.3C21.1 16.7 21.1 17.3 20.7 17.7C20.5 17.9 20.3 18 20 18Z" fill="#212121"/>
-    </svg>
-  </template>
-
-  <template id="icon-search">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M26.1998 21.9L21.9998 17.7C21.1998 16.9 19.9998 16.9 19.1998 17.7L17.8998 16.4C18.6998 15.2 19.2998 13.8 19.2998 12.3C19.2998 8.40005 16.0998 5.30005 12.2998 5.30005C8.3998 5.30005 5.2998 8.40005 5.2998 12.3C5.2998 16.2 8.3998 19.3 12.2998 19.3C13.8998 19.3 15.3998 18.8 16.5998 17.9L17.7998 19.1C16.9998 19.9 16.9998 21.1 17.7998 21.9L21.9998 26.1C22.3998 26.5 22.8998 26.7001 23.3998 26.7001C23.8998 26.7001 24.3998 26.5 24.7998 26.1L26.1998 24.7001C26.8998 24 26.8998 22.7 26.1998 21.9ZM12.2998 17.3C9.4998 17.3 7.2998 15.1 7.2998 12.3C7.2998 9.50005 9.4998 7.30005 12.2998 7.30005C15.0998 7.30005 17.2998 9.50005 17.2998 12.3C17.2998 15.1 15.0998 17.3 12.2998 17.3ZM23.2998 24.7001L19.0998 20.5L20.4998 19.1L24.6998 23.3L23.2998 24.7001Z" fill="#212121"/>
-    </svg>
-  </template>
+    </div>
   <script src="dist/bundle.js"></script>
 </body>
 </html>
